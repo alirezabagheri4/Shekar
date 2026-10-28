@@ -18,13 +18,18 @@
 
 <label for="lk" style="font-weight: 700; font-size: 14px">لینک آگهی خودرو</label>
 <div class="zfield">
-<input id="lk" type="url" dir="ltr" placeholder="https://…" value="" aria-invalid="false">
+<input id="lk" name="AdUrl" form="apf" type="url" dir="ltr" placeholder="https://…" value="" aria-invalid="false" required>
 <button class="zpaste" type="button">چسباندن</button>
 </div>
 
 <span style="color: #6B7280; font-size: 13px">از صفحه‌ی آگهی، «اشتراک‌گذاری» رو بزن و لینک رو کپی کن.</span>
 
-<a href="/appraise/result" class="zbtn zbtn-p">بررسی کن</a>
+<form id="apf" method="post" action="/appraise"></form>
+@if (TempData["AppraiseError"] is string err)
+{
+    <span style="color: #DC2626; font-size: 13px">@err</span>
+}
+<button type="submit" form="apf" class="zbtn zbtn-p" style="border: 0; cursor: pointer; font-family: inherit">بررسی کن</button>
 
 </div>
 

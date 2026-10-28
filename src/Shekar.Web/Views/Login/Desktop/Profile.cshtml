@@ -1,3 +1,4 @@
+@model LoginProfileViewModel
 @{
     ViewData["Title"] = "ورود";
 }
@@ -19,19 +20,24 @@
 
 <div style="display: flex; flex-direction: column; gap: 16px">
 <div><h1 style="margin: 0 0 6px; font-size: 28px; font-weight: 800">یه آشنایی کوچیک!</h1><p style="margin: 0; color: #6B7280">فقط همین یه بار می‌پرسیم.</p><span style="display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; background: #FBF6E6; color: #8A6A0B; border: 1px solid #F1DFA6; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 700"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="13" rx="2"></rect><path d="M3 12h18M12 8v13"></path></svg>هدیه‌ی ثبت‌نام: ۲۴ ساعت اشتراک رایگان</span></div>
+<form method="post" action="/login/profile" style="display: flex; flex-direction: column; gap: 16px">
+<input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
 <div style="display: flex; gap: 12px">
-<div style="flex: 1; display: flex; flex-direction: column; gap: 8px"><label for="fn" style="font-weight: 600; font-size: 14px">نام</label><input id="fn" class="zin" value="کامران"></div>
-<div style="flex: 1; display: flex; flex-direction: column; gap: 8px"><label for="ln" style="font-weight: 600; font-size: 14px">نام خانوادگی</label><input id="ln" class="zin" value="رضایی"></div>
+<div style="flex: 1; display: flex; flex-direction: column; gap: 8px"><label for="fn" style="font-weight: 600; font-size: 14px">نام</label><input id="fn" name="FirstName" class="zin" value="" required></div>
+<div style="flex: 1; display: flex; flex-direction: column; gap: 8px"><label for="ln" style="font-weight: 600; font-size: 14px">نام خانوادگی</label><input id="ln" name="LastName" class="zin" value="" required></div>
 </div>
-<div style="display: flex; flex-direction: column; gap: 8px; position: relative">
+<div style="display: flex; flex-direction: column; gap: 8px">
 <label for="ct" style="font-weight: 600; font-size: 14px">شهر</label>
-<div style="position: relative">
-<input id="ct" class="zin" role="combobox" aria-expanded="false" aria-controls="ctl" autocomplete="off" placeholder="جستجوی شهر…" value="تهران" style="padding-left: 40px">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2" aria-hidden="true" style="position: absolute; left: 14px; top: 17px"><path d="M6 9l6 6 6-6"></path></svg>
+<select id="ct" name="CityId" class="zin">
+@foreach (var c in Model.Cities)
+{
+    <option value="@c.Id" disabled="@(!c.IsActive)" selected="@(c.IsActive)">@c.Name@(c.IsActive ? "" : " (به‌زودی)")</option>
+}
+</select>
 </div>
-
-</div>
-<a href="/plans" class="zbtn zbtn-p">بزن بریم!</a>
+<span asp-validation-summary="All" style="color: #DC2626; font-size: 12px"></span>
+<button type="submit" class="zbtn zbtn-p" style="border: 0; cursor: pointer; font-family: inherit">بزن بریم!</button>
+</form>
 
 </div>
 

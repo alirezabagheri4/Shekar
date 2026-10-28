@@ -17,6 +17,10 @@ public sealed record CategoriesViewModel(
 
 public sealed record AppraiseViewModel(AppraisalQuotaDto Quota);
 
+public sealed record LoginOtpViewModel(string Mobile);
+
+public sealed record LoginProfileViewModel(IReadOnlyList<(int Id, string Name, bool IsActive)> Cities);
+
 public sealed record PlansViewModel(
     IReadOnlyList<PlanDto> Plans,
     CityCapacityDto Capacity);

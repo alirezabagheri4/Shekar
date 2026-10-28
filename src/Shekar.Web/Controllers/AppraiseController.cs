@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Shekar.Application.Common;
 using Shekar.Application.Contracts;
 using Shekar.Application.Services;
 using Shekar.Web.Models;
@@ -22,6 +23,28 @@ public class AppraiseController : Controller
         // R5 — سهمیه‌ی رایگان تمام‌شده برای کاربر بدون اشتراک.
         bool exhausted = !quota.IsSubscriber && quota.Remaining == 0;
         return View(exhausted ? "QuotaExhausted" : "Index", vm);
+    }
+
+    // ثبت لینک و اجرای کارشناسی (R5)، سپس نمایش انیمیشن تحلیل.
+    [HttpPost("/appraise")]
+    public async Task<IActionResult> Submit(AppraisalRequestDto request, CancellationToken ct)
+    {
+        try
+        {
+            await _appraisals.AppraiseAsync(request, ct);
+            return Redirect("/appraise/analyze");
+        }
+        catch (AppValidationException ex)
+        {
+            // R5 — لینک نامعتبر است.
+            TempData["AppraiseError"] = ex.Message;
+            return Redirect("/appraise");
+        }
+        catch (ForbiddenException)
+        {
+            // R5 — سهمیه تمام شد.
+            return Redirect("/appraise");
+        }
     }
 
     [HttpGet("/appraise/analyze")]

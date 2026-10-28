@@ -1,3 +1,4 @@
+@model LoginProfileViewModel
 @{
     ViewData["Title"] = "ورود";
 }
@@ -17,17 +18,24 @@
 
 <div style="display: flex; flex-direction: column; gap: 14px; flex: 1">
 <div><h1 style="margin: 0 0 4px; font-size: 24px; font-weight: 800">یه آشنایی کوچیک!</h1><p style="margin: 0; color: #6B7280">فقط همین یه بار می‌پرسیم.</p><span style="display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; background: #FBF6E6; color: #8A6A0B; border: 1px solid #F1DFA6; padding: 5px 10px; border-radius: 999px; font-size: 12px; font-weight: 700">هدیه‌ی ثبت‌نام: ۲۴ ساعت اشتراک رایگان</span></div>
-<div style="display: flex; flex-direction: column; gap: 6px"><label for="fn" style="font-weight: 600; font-size: 14px">نام</label><input id="fn" class="zin" value="کامران"></div>
-<div style="display: flex; flex-direction: column; gap: 6px"><label for="ln" style="font-weight: 600; font-size: 14px">نام خانوادگی</label><input id="ln" class="zin" value="رضایی"></div>
-<div style="display: flex; flex-direction: column; gap: 6px; position: relative">
+<form method="post" action="/login/profile" style="display: flex; flex-direction: column; gap: 14px; flex: 1">
+<input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
+<div style="display: flex; flex-direction: column; gap: 6px"><label for="fn" style="font-weight: 600; font-size: 14px">نام</label><input id="fn" name="FirstName" class="zin" value="" required></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><label for="ln" style="font-weight: 600; font-size: 14px">نام خانوادگی</label><input id="ln" name="LastName" class="zin" value="" required></div>
+<div style="display: flex; flex-direction: column; gap: 6px">
 <label for="ct" style="font-weight: 600; font-size: 14px">شهر</label>
-<input id="ct" class="zin" role="combobox" aria-expanded="false" aria-controls="ctl" autocomplete="off" placeholder="جستجوی شهر…" value="تهران">
-
+<select id="ct" name="CityId" class="zin">
+@foreach (var c in Model.Cities)
+{
+    <option value="@c.Id" disabled="@(!c.IsActive)" selected="@(c.IsActive)">@c.Name@(c.IsActive ? "" : " (به‌زودی)")</option>
+}
+</select>
 </div>
+<span asp-validation-summary="All" style="color: #DC2626; font-size: 12px"></span>
 <div style="margin-top: auto">
-<a href="/plans" class="zbtn zbtn-p">بزن بریم!</a>
-
+<button type="submit" class="zbtn zbtn-p" style="width: 100%; border: 0; cursor: pointer; font-family: inherit">بزن بریم!</button>
 </div>
+</form>
 </div>
 
 </div>

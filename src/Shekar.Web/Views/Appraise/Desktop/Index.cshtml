@@ -28,11 +28,16 @@
 <div style="display: flex; gap: 10px; flex-wrap: wrap">
 <div class="zfield">
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: none"><path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1"></path><path d="M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"></path></svg>
-<input id="lk" type="url" dir="ltr" placeholder="https://… لینک آگهی رو اینجا بچسبون" value="" aria-invalid="false" aria-describedby="lkh">
+<input id="lk" name="AdUrl" form="apf" type="url" dir="ltr" placeholder="https://… لینک آگهی رو اینجا بچسبون" value="" aria-invalid="false" aria-describedby="lkh" required>
 <button class="zpaste" type="button"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="8" y="3" width="8" height="4" rx="1"></rect><path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-2"></path></svg>چسباندن</button>
 </div>
 
-<a href="/appraise/result" class="zbtn zbtn-p">بررسی کن</a>
+<form id="apf" method="post" action="/appraise"></form>
+@if (TempData["AppraiseError"] is string err)
+{
+    <span style="color: #DC2626; font-size: 13px">@err</span>
+}
+<button type="submit" form="apf" class="zbtn zbtn-p" style="border: 0; cursor: pointer; font-family: inherit">بررسی کن</button>
 </div>
 
 <span id="lkh" style="color: #6B7280; font-size: 14px">لینک رو از صفحه‌ی آگهی کپی کن (دکمه‌ی «اشتراک‌گذاری») و اینجا بچسبون.</span>

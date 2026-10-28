@@ -1,3 +1,4 @@
+@model LoginOtpViewModel
 @{
     ViewData["Title"] = "ورود";
 }
@@ -16,21 +17,27 @@
 </div>
 
 <div style="display: flex; flex-direction: column; gap: 16px; flex: 1">
-<div><h1 style="margin: 0 0 4px; font-size: 24px; font-weight: 800">کد رو وارد کن</h1><p style="margin: 0; color: #6B7280">یه کد ۵ رقمی به <b dir="ltr" style="color: #111827">۰۹۱۲۳۴۵۶۷۸۹</b> فرستادیم.</p><button class="zlink">شماره رو اشتباه زدی؟ ویرایش کن</button></div>
+<div><h1 style="margin: 0 0 4px; font-size: 24px; font-weight: 800">کد رو وارد کن</h1><p style="margin: 0; color: #6B7280">یه کد ۵ رقمی به <b dir="ltr" style="color: #111827">@ViewFormat.Digits(Model.Mobile)</b> فرستادیم.</p><a class="zlink" href="/login?returnUrl=@ViewData["ReturnUrl"]">شماره رو اشتباه زدی؟ ویرایش کن</a></div>
+<form method="post" action="/login/otp" style="display: flex; flex-direction: column; gap: 16px; flex: 1">
+<input type="hidden" name="mobile" value="@Model.Mobile" />
+<input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
 <fieldset style="border: 0; padding: 0; margin: 0"><legend style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">کد یک‌بارمصرف</legend>
 <div dir="ltr" style="display: flex; justify-content: space-between">
-<input class="zotp zotp-ok" type="text" inputmode="numeric" maxlength="5" autocomplete="one-time-code" aria-label="رقم ۱" value="۱"><input class="zotp zotp-ok" type="text" inputmode="numeric" maxlength="5" autocomplete="one-time-code" aria-label="رقم ۲" value="۲"><input class="zotp zotp-ok" type="text" inputmode="numeric" maxlength="5" autocomplete="one-time-code" aria-label="رقم ۳" value="۳"><input class="zotp zotp-ok" type="text" inputmode="numeric" maxlength="5" autocomplete="one-time-code" aria-label="رقم ۴" value="۴"><input class="zotp zotp-ok" type="text" inputmode="numeric" maxlength="5" autocomplete="one-time-code" aria-label="رقم ۵" value="۵">
+<input class="zotp" name="d1" type="text" inputmode="numeric" maxlength="1" autocomplete="one-time-code" aria-label="رقم ۱" value="" required><input class="zotp" name="d2" type="text" inputmode="numeric" maxlength="1" aria-label="رقم ۲" value="" required><input class="zotp" name="d3" type="text" inputmode="numeric" maxlength="1" aria-label="رقم ۳" value="" required><input class="zotp" name="d4" type="text" inputmode="numeric" maxlength="1" aria-label="رقم ۴" value="" required><input class="zotp" name="d5" type="text" inputmode="numeric" maxlength="1" aria-label="رقم ۵" value="" required>
 </div></fieldset>
-
+<span asp-validation-summary="All" style="color: #DC2626; font-size: 13px; text-align: center"></span>
 <div style="display: flex; justify-content: center; font-size: 14px; color: #6B7280">
-<span>ارسال دوباره‌ی کد تا <b dir="ltr" style="color: #111827">۲:۰۰</b></span>
-
+<span>کد تستی: <b dir="ltr" style="color: #111827">۱۲۳۴۵</b></span>
 </div>
 <div style="margin-top: auto">
-
-<a href="/login/profile" class="zbtn zbtn-p">تأیید و ادامه</a>
-
+<button type="submit" class="zbtn zbtn-p" style="width: 100%; border: 0; cursor: pointer; font-family: inherit">تأیید و ادامه</button>
 </div>
+</form>
 </div>
+@section scripts {
+<script>
+(function(){var b=document.querySelectorAll('.zotp');b.forEach(function(el,i){el.addEventListener('input',function(){if(el.value.length>=1&&i<b.length-1)b[i+1].focus();});el.addEventListener('keydown',function(e){if(e.key==='Backspace'&&!el.value&&i>0)b[i-1].focus();});});b[0].focus();})();
+</script>
+}
 
 </div>
