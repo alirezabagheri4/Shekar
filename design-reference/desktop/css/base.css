@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap");
+html,body{font-family:Vazirmatn,Tahoma,sans-serif}
+:root{--teal:#0F766E;--teal-700:#0B5D57;--teal-900:#134E4A;--teal-50:#E6F4F1;--teal-100:#CDEBE5;--mint:#5EEAD4;--gold:#D4A017;--gold-50:#FBF6E6;--amber:#D97706;--amber-50:#FEF3C7;--ink:#111827;--ink-2:#374151;--muted:#6B7280;--line:#E5E7EB;--line-2:#EEF0F2;--soft:#F6F8F8;--danger:#DC2626;--danger-50:#FEE2E2;--r-sm:8px;--r-md:14px;--r-lg:20px;--r-xl:28px;--sh-1:0 2px 8px rgba(17,24,39,.06);--sh-2:0 12px 32px rgba(15,60,55,.10);--sh-3:0 24px 56px rgba(15,60,55,.16)}
+*{box-sizing:border-box}
+a{color:#0F766E;text-decoration:none}
+a:hover{color:#0B5D57}
+.zbtn-p{background:#0F766E;color:#FFFFFF}
+.zbtn-p:hover{background:#0B5D57;color:#FFFFFF}
+body{color:var(--ink)}
+.zbtn{min-height:52px;border-radius:var(--r-md);font-size:16px;font-weight:700;gap:8px}
+.zbtn-p{background:var(--teal);color:#FFFFFF;box-shadow:0 8px 20px rgba(15,118,110,.22)}
+.zbtn-p:hover{background:var(--teal-700);color:#FFFFFF}
+.zbtn-s{background:#FFFFFF;color:var(--teal);border:1.5px solid var(--teal-100)}
+.zbtn-s:hover{border-color:var(--teal)}
+.zbtn-g{background:var(--soft);color:var(--ink)}
+.zbtn-w{background:var(--ink);color:#FFFFFF}
+.zbtn-off,.zbtn[disabled]{background:var(--line);color:var(--muted);box-shadow:none;cursor:not-allowed}
+.zcard,.zbox,.zcardb{border-color:var(--line)}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--mint);outline-offset:2px}
+@keyframes zpulse{0%{box-shadow:0 0 0 0 rgba(15,118,110,.45)}70%{box-shadow:0 0 0 8px rgba(15,118,110,0)}100%{box-shadow:0 0 0 0 rgba(15,118,110,0)}}
+@keyframes zsh{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes zspin{to{transform:rotate(360deg)}}
+@keyframes zbar{from{width:0}to{width:100%}}
+@keyframes zpop{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+@keyframes zscan{0%{right:6%}50%{right:92%}100%{right:6%}}
+@keyframes zgrow{from{width:0}}
+@keyframes zring{from{stroke-dasharray:0 340}}
+.zlive{animation:zpulse 1.8s infinite}
+.zsk{animation:zsh 1.4s linear infinite}
+.zspin{animation:zspin .9s linear infinite}
+.zbar{animation:zbar 2.6s linear forwards}
+.zpop,.zmark{animation:zpop .45s ease-out both}
+.zbeam{animation:zscan 2.6s ease-in-out infinite}
+.zbarw{animation:zgrow .9s cubic-bezier(.2,.8,.2,1) both}
+.zring{animation:zring 1s ease-out both}
+.zbtn,.zcard,.zcat,.zsort,.ztab,.zbell,.zseg,.zside,.zrow,.zpl,.zthumb,.zopt,.zpaste{transition:background-color .15s,border-color .15s,color .15s,box-shadow .2s,transform .2s}
+.zbtn:active{transform:scale(.98)}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}

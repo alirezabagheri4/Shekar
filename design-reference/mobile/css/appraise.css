@@ -1,0 +1,13 @@
+body{margin:0;background:#FFFFFF}
+button,input{font-family:inherit}
+.zbtn{display:flex;align-items:center;justify-content:center;width:100%;min-height:54px;border-radius:14px;font-weight:700;font-size:16px;border:0;cursor:pointer}
+.zbtn-p{background:#0F766E;color:#FFFFFF}
+.zbtn-p:hover{color:#FFFFFF}
+.zbtn-g{background:#F6F8F8;color:#111827}
+.zfield{display:flex;align-items:center;gap:8px;min-height:56px;border:1.5px solid #E5E7EB;border-radius:14px;padding:0 6px 0 12px;background:#FFFFFF}
+.zfield:focus-within{border-color:#0F766E;box-shadow:0 0 0 3px #E6F4F1}
+.zfield-err{border-color:#DC2626;box-shadow:0 0 0 3px #FEE2E2}
+.zfield input{flex:1;min-width:0;border:0;outline:none;font-size:16px;color:#111827;background:transparent;height:52px}
+.zpaste{min-height:44px;padding:0 10px;border-radius:10px;border:0;background:#E6F4F1;color:#0F766E;font-weight:700;font-size:13px;cursor:pointer}
+.znav{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;min-height:56px;justify-content:center;font-size:11px;color:#6B7280}
+.znav-on{color:#0F766E;font-weight:700}

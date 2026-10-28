@@ -1,0 +1,29 @@
+body{margin:0;background:#FFFFFF}
+button{font-family:inherit}
+.zlive{display:inline-block;width:8px;height:8px;border-radius:50%;background:#0F766E;}
+.zsk{background:linear-gradient(90deg,#EEF0F2 25%,#F6F8F8 50%,#EEF0F2 75%);background-size:200% 100%;border-radius:8px}
+.zcard{display:flex;gap:12px;padding:10px;background:#FFFFFF;border:1px solid #E5E7EB;border-radius:16px;color:#111827;position:relative}
+.zcard-new{border-color:#0F766E;box-shadow:0 0 0 3px #E6F4F1}
+.zcard-off{filter:grayscale(1);opacity:.62;cursor:not-allowed}
+.zcard-off:hover{transform:none;box-shadow:none}
+.ztab{flex:1;min-height:44px;border:0;background:transparent;border-bottom:2.5px solid transparent;font-weight:600;font-size:15px;color:#6B7280;cursor:pointer}
+.ztab-on{color:#0F766E;border-bottom-color:#0F766E}
+.zsort{min-height:36px;padding:0 12px;border-radius:999px;border:1px solid #E5E7EB;background:#FFFFFF;font-size:13px;color:#111827;cursor:pointer;white-space:nowrap}
+.zsort-on{background:#111827;border-color:#111827;color:#FFFFFF}
+.zbell{display:flex;align-items:center;gap:6px;min-height:40px;padding:0 12px;border-radius:999px;border:1.5px solid #0F766E;background:#FFFFFF;color:#0F766E;font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap}
+.zbell-on{background:#0F766E;color:#FFFFFF}
+.zbell-lock{border-color:#E5E7EB;color:#6B7280}
+.zbtn{display:flex;align-items:center;justify-content:center;width:100%;min-height:50px;border-radius:12px;font-weight:700;font-size:16px;border:0;cursor:pointer}
+.zbtn-p{background:#0F766E;color:#FFFFFF}
+.zbtn-p:hover{color:#FFFFFF}
+.zbtn-g{background:#F6F8F8;color:#111827}
+.znav{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;min-height:56px;justify-content:center;font-size:11px;color:#6B7280}
+.znav-on{color:#0F766E;font-weight:700}
+.zblur{filter:blur(7px);pointer-events:none;user-select:none}
+.zrow::-webkit-scrollbar{display:none}
+.zlk{filter:blur(5px);user-select:none}
+.zlkimg{filter:blur(6px) saturate(.8);transform:scale(1.08)}
+.zcard-lock{cursor:pointer}
+.zlkchip{position:absolute;inset:0;display:grid;place-items:center}
+.zlkchip>span{display:inline-flex;align-items:center;gap:6px;background:rgba(17,24,39,.78);color:#FFFFFF;font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px}
+.zv{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;padding:3px 8px;border-radius:8px;white-space:nowrap}

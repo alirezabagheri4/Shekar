@@ -1,0 +1,16 @@
+body{margin:0;background:#FFFFFF}
+button,input{font-family:inherit}
+.zlive{display:inline-block;width:8px;height:8px;border-radius:50%;background:#5EEAD4;}
+.zbeam{position:absolute;top:10%;bottom:10%;width:2px;background:#5EEAD4;box-shadow:0 0 28px 8px rgba(94,234,212,.3);}
+.zbtn{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;border-radius:12px;font-weight:700;font-size:16px;border:0;cursor:pointer}
+.zbtn-off{background:#E5E7EB;color:#6B7280;cursor:not-allowed}
+.zin{width:100%;min-height:52px;border:1.5px solid #E5E7EB;border-radius:12px;padding:0 16px;font-size:16px;color:#111827;background:#FFFFFF;outline:none}
+.zin:focus{border-color:#0F766E;box-shadow:0 0 0 3px #E6F4F1}
+.zin-err{border-color:#DC2626}
+.zotp{width:56px;height:64px;text-align:center;font-size:26px;font-weight:700;border:1.5px solid #E5E7EB;border-radius:12px;outline:none;color:#111827}
+.zotp:focus{border-color:#0F766E;box-shadow:0 0 0 3px #E6F4F1}
+.zotp-ok{border-color:#0F766E}
+.zotp-err{border-color:#DC2626;color:#DC2626}
+.zlink{background:none;border:0;color:#0F766E;font-weight:700;cursor:pointer;padding:6px 0;font-size:14px}
+.zopt{display:block;width:100%;text-align:right;background:#FFFFFF;border:0;padding:10px 14px;font-size:15px;cursor:pointer;color:#111827}
+.zopt:hover{background:#E6F4F1}

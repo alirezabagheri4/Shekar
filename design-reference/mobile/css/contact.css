@@ -1,0 +1,7 @@
+body{margin:0;background:#FFFFFF}
+button{font-family:inherit}
+.zlive{display:inline-block;width:8px;height:8px;border-radius:50%;background:#5EEAD4;flex:none}
+.zoff{display:inline-block;width:8px;height:8px;border-radius:50%;background:#9CA3AF;flex:none}
+.zch{display:flex;align-items:center;gap:12px;border:1px solid #E5E7EB;border-radius:20px;padding:14px;background:#FFFFFF;color:#111827}
+.zch:hover{border-color:#0F766E;color:#111827}
+.zcopy{min-height:44px;padding:0 14px;border-radius:12px;border:0;background:#FFFFFF;color:#0F766E;font-weight:700;font-size:13px;cursor:pointer}
