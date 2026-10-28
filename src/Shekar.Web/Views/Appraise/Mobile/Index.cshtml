@@ -1,3 +1,4 @@
+@model AppraiseViewModel
 @{
     ViewData["Title"] = "کارشناسی قیمت";
 }
@@ -7,13 +8,13 @@
 <div dir="rtl" style="width: 100%; max-width: 480px; margin: 0 auto; min-height: 100vh; font-family: Vazirmatn, Tahoma, sans-serif; color: #111827; background: #FFFFFF; display: flex; flex-direction: column; position: relative">
 <main style="padding: 20px 16px 28px; display: flex; flex-direction: column; gap: 20px; flex: 1">
 <div style="display: flex; flex-direction: column; gap: 10px">
-<span style="align-self: flex-start; background: #E6F4F1; color: #0F766E; font-weight: 700; font-size: 12px; padding: 5px 12px; border-radius: 999px">این ماه ۲ کارشناسی رایگان داری</span>
+<span style="align-self: flex-start; background: #E6F4F1; color: #0F766E; font-weight: 700; font-size: 12px; padding: 5px 12px; border-radius: 999px">@(Model.Quota.IsSubscriber ? "با اشتراک، کارشناسی نامحدوده" : $"این ماه {ViewFormat.Digits(Model.Quota.Remaining.ToString())} کارشناسی رایگان داری")</span>
 <h1 style="margin: 0; font-size: 24px; font-weight: 800; line-height: 1.5">لینک آگهی بده، ارزش خریدش رو بهت بگیم!</h1>
 <p style="margin: 0; color: #6B7280; font-size: 14px; line-height: 1.8">تو حدود ۲۰ ثانیه می‌فهمی این ماشین می‌ارزه یا نه.</p>
 </div>
 
 <div style="display: flex; flex-direction: column; gap: 10px">
-<div style="background: #F6F8F8; border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 8px"><div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px"><b>کارشناسی رایگان این ماه</b><b style="color: #0F766E">۲ از ۳ مونده</b></div><div style="display: flex; gap: 4px" aria-hidden="true"><span style="flex: 1; height: 6px; border-radius: 4px; background: #D1D5DB"></span><span style="flex: 1; height: 6px; border-radius: 4px; background: #0F766E"></span><span style="flex: 1; height: 6px; border-radius: 4px; background: #0F766E"></span></div><a href="/plans" style="font-size: 12px; font-weight: 700">با اشتراک، نامحدود ←</a></div>
+<div style="background: #F6F8F8; border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 8px"><div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px"><b>کارشناسی رایگان این ماه</b><b style="color: #0F766E">@(Model.Quota.IsSubscriber ? "نامحدود" : $"{ViewFormat.Digits(Model.Quota.Remaining.ToString())} از ۳ مونده")</b></div><div style="display: flex; gap: 4px" aria-hidden="true"><span style="flex: 1; height: 6px; border-radius: 4px; background: #D1D5DB"></span><span style="flex: 1; height: 6px; border-radius: 4px; background: #0F766E"></span><span style="flex: 1; height: 6px; border-radius: 4px; background: #0F766E"></span></div><a href="/plans" style="font-size: 12px; font-weight: 700">با اشتراک، نامحدود ←</a></div>
 
 <label for="lk" style="font-weight: 700; font-size: 14px">لینک آگهی خودرو</label>
 <div class="zfield">
