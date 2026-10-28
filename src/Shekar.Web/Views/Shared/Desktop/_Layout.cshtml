@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>@(ViewData["Title"] is null ? "شکار" : ViewData["Title"] + " — شکار")</title>
+<link rel="icon" href="~/assets/brand/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="~/css/fonts.css">
+@await RenderSectionAsync("css", required: false)
+</head>
+<body>
+@RenderBody()
+@await RenderSectionAsync("scripts", required: false)
+</body>
+</html>

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Shekar.Application;
 using Shekar.Application.Abstractions;
 using Shekar.Mock;
@@ -10,6 +11,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// تشخیص دستگاه + انتخاب View بر اساس دستگاه (دو قالب، یک بک‌اند).
+builder.Services.AddScoped<DeviceContext>();
+builder.Services.AddScoped<IDeviceContext>(sp => sp.GetRequiredService<DeviceContext>());
+builder.Services.Configure<RazorViewEngineOptions>(options =>
+    options.ViewLocationExpanders.Add(new DeviceViewLocationExpander()));
 
 // لایه‌های برنامه؛ پیش‌فرض Mock.
 builder.Services.AddApplicationServices();
@@ -52,6 +59,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseMiddleware<DeviceDetectionMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();

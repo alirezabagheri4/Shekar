@@ -1,0 +1,72 @@
+@{
+    ViewData["Title"] = "نتیجه‌ی تحلیل";
+}
+@section css {
+<link rel="stylesheet" href="~/css/desktop/base.css"><link rel="stylesheet" href="~/css/desktop/analyze-result.css">
+}
+<div dir="rtl" style="font-family: Vazirmatn, Tahoma, sans-serif; color: #111827; background: #FFFFFF; min-height: 100vh">
+<header style="position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.94); border-bottom: 1px solid #EEF0F2">
+<div style="max-width: 1240px; margin: 0 auto; padding: 0 32px; min-height: 72px; display: flex; align-items: center; gap: 36px">
+<a href="/" style="display: flex; align-items: center; gap: 10px; color: #111827"><svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="10" fill="#0F766E"></rect><circle cx="18" cy="18" r="8.5" fill="none" stroke="#fff" stroke-width="3"></circle><circle cx="18" cy="18" r="3" fill="#D4A017"></circle></svg><b style="font-size: 22px">شکار</b></a>
+<nav aria-label="منوی اصلی" style="display: flex; gap: 28px; flex: 1"><a href="/hunts" style="color: #374151; font-weight: 500">شکارها</a><a href="/appraise" aria-current="page" style="color: #0F766E; font-weight: 700">کارشناسی قیمت</a><a href="/plans" style="color: #374151; font-weight: 500">پلن‌ها</a><a href="/contact" style="color: #374151; font-weight: 500">تماس با ما</a></nav>
+<a href="/account" aria-label="حساب کاربری" style="width: 44px; height: 44px; border-radius: 50%; background: #E6F4F1; display: grid; place-items: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg></a>
+</div>
+</header>
+
+<main style="max-width: 1120px; margin: 0 auto; padding: 40px 24px 96px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; align-items: center; gap: 10px; background: #F6F8F8; border-radius: 14px; padding: 12px 16px; font-size: 14px; flex-wrap: wrap">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1"></path><path d="M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"></path></svg>
+<span style="color: #6B7280">آگهی:</span><b>پژو ۲۰۷ دنده‌ای پانوراما ۱۴۰۲ · ۱٫۳۴ میلیارد</b>
+<a href="/appraise" style="margin-right: auto; font-weight: 600; min-height: 32px; display: flex; align-items: center">تغییر لینک</a>
+</div>
+
+<div class="zfade" style="display: flex; flex-direction: column; gap: 20px">
+<section class="zbox" style="flex-direction: row; flex-wrap: wrap; align-items: center; gap: 28px; padding: 28px; background: #FBF6E6; border-color: #F1DFA6">
+<span style="position: relative; display: inline-grid; place-items: center; flex: none; width: 150px; height: 150px"><svg width="150" height="150" viewBox="0 0 128 128" role="img" aria-label="امتیاز ۸۷ از ۱۰۰"><circle cx="64" cy="64" r="54" fill="none" stroke="#FFFFFF" stroke-width="12"></circle><circle cx="64" cy="64" r="54" fill="none" stroke="#D4A017" stroke-width="12" stroke-linecap="round" stroke-dasharray="295.2 339.3" transform="rotate(-90 64 64)" ></circle></svg><span aria-hidden="true" style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.15; font-family: Vazirmatn, Tahoma, sans-serif"><span style="font-size: 44px; font-weight: 800; color: #111827">۸۷</span><span style="font-size: 14px; font-weight: 500; color: #6B7280">از ۱۰۰</span></span></span>
+<div style="flex: 1; min-width: 260px; display: flex; flex-direction: column; gap: 10px">
+<span style="align-self: flex-start; font-size: 20px; font-weight: 800; padding: 6px 18px; border-radius: 999px; background: #D4A017; color: #111827">فرصت طلایی</span>
+<h1 style="margin: 0; font-size: 28px; font-weight: 800">خرید خوبیه! حدود ۱۴٪ زیر قیمت بازاره.</h1>
+<span style="color: #374151">پژو ۲۰۷ دنده‌ای پانوراما ۱۴۰۲ · ۱٫۳۴ میلیارد تومان · ۲۸ هزار کیلومتر</span>
+</div>
+</section>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px">
+<section class="zbox" aria-labelledby="mk">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap"><h2 id="mk" style="margin: 0; font-size: 18px">سنجه‌ی بازار</h2><span style="font-size: 13px; color: #0F766E; font-weight: 600">اطمینان: بالا (۴۲ آگهی مشابه)</span></div>
+<div style="display: flex; justify-content: space-between; font-size: 14px"><span style="color: #6B7280">بازه‌ی قیمت منصفانه</span><b>۱٫۵۲ تا ۱٫۶۰ میلیارد</b></div>
+<div style="padding-top: 32px; position: relative">
+<div style="position: absolute; top: 0; left: 16%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center;"><span style="background: #111827; color: #FFFFFF; font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 8px; white-space: nowrap">۱۴٪ زیر بازار</span><span style="width: 2px; height: 12px; background: #111827"></span></div>
+<div style="display: flex; height: 12px; border-radius: 999px; overflow: hidden; gap: 4px"><span style="flex: 1; background: #FCA5A5"></span><span style="flex: 1.2; background: #5EEAD4"></span><span style="flex: 1; background: #D4A017"></span></div>
+<div style="display: flex; justify-content: space-between; margin-top: 8px; font-size: 12px; color: #6B7280"><span>گران</span><span>منصفانه</span><span>فرصت طلایی</span></div>
+</div>
+<div style="background: #F6F8F8; border-radius: 14px; padding: 14px; display: flex; justify-content: space-between"><span style="color: #6B7280">سود تخمینی</span><b>۱۹۵,۰۰۰,۰۰۰ تومان</b></div>
+</section>
+
+<section class="zbox" aria-labelledby="sc">
+<h2 id="sc" style="margin: 0; font-size: 18px">امتیاز از کجا اومد؟</h2>
+
+<div style="display: grid; grid-template-columns: 96px 1fr 36px; align-items: center; gap: 10px; font-size: 14px"><span>قیمت</span><div style="height: 8px; background: #F3F4F6; border-radius: 8px; overflow: hidden"><div class="zbarw" style="height: 100%; width: 95%; background: #0F766E"></div></div><b style="text-align: left">۹۵</b></div>
+
+<div style="display: grid; grid-template-columns: 96px 1fr 36px; align-items: center; gap: 10px; font-size: 14px"><span>وضعیت فنی</span><div style="height: 8px; background: #F3F4F6; border-radius: 8px; overflow: hidden"><div class="zbarw" style="height: 100%; width: 80%; background: #0F766E"></div></div><b style="text-align: left">۸۰</b></div>
+
+<div style="display: grid; grid-template-columns: 96px 1fr 36px; align-items: center; gap: 10px; font-size: 14px"><span>کارکرد</span><div style="height: 8px; background: #F3F4F6; border-radius: 8px; overflow: hidden"><div class="zbarw" style="height: 100%; width: 82%; background: #0F766E"></div></div><b style="text-align: left">۸۲</b></div>
+
+<div style="display: grid; grid-template-columns: 96px 1fr 36px; align-items: center; gap: 10px; font-size: 14px"><span>نقدشوندگی</span><div style="height: 8px; background: #F3F4F6; border-radius: 8px; overflow: hidden"><div class="zbarw" style="height: 100%; width: 90%; background: #0F766E"></div></div><b style="text-align: left">۹۰</b></div>
+
+<div style="display: grid; grid-template-columns: 96px 1fr 36px; align-items: center; gap: 10px; font-size: 14px"><span>ریسک</span><div style="height: 8px; background: #F3F4F6; border-radius: 8px; overflow: hidden"><div class="zbarw" style="height: 100%; width: 72%; background: #0F766E"></div></div><b style="text-align: left">۷۲</b></div>
+
+</section>
+
+<section class="zbox" aria-labelledby="rk">
+<h2 id="rk" style="margin: 0; font-size: 18px">ریسک‌ها و نکته‌ها</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><span style="background: #FEF3C7; color: #92400E; font-size: 13px; font-weight: 600; padding: 6px 12px; border-radius: 999px">رنگ‌شدگی ذکر شده</span><span style="background: #E6F4F1; color: #0F766E; font-size: 13px; font-weight: 600; padding: 6px 12px; border-radius: 999px">بیمه‌ی معتبر</span><span style="background: #E6F4F1; color: #0F766E; font-size: 13px; font-weight: 600; padding: 6px 12px; border-radius: 999px">نقدشوندگی بالا</span></div>
+<div style="background: #E6F4F1; border-radius: 14px; padding: 14px; line-height: 1.8; font-size: 14px"><b style="color: #0F766E; display: block">خلاصه‌ی هوش مصنوعی</b>قیمتش واقعاً خوبه و ماشین پرطرفداره. فقط چون رنگ‌شدگی ذکر شده، حتماً کارشناسی بدنه بگیر.</div>
+</section>
+</div>
+
+<div style="display: flex; gap: 12px; flex-wrap: wrap"><a href="/hunts" class="zbtn zbtn-p">دیدن شکارهای مشابه</a><a href="/appraise" class="zbtn zbtn-s">یه آگهی دیگه رو بررسی کن</a><a href="#" class="zbtn zbtn-s">دیدن آگهی اصلی</a></div>
+<p style="margin: 0; font-size: 13px; color: #6B7280">قیمت و سود تخمینیه و تضمینی نیست؛ قبل از خرید حتماً کارشناسی کن.</p>
+</div>
+
+</main>
+</div>

@@ -1,0 +1,111 @@
+@{
+    ViewData["Title"] = "ماشین زیر قیمت بازار رو شکار کن";
+}
+@section css {
+<link rel="stylesheet" href="~/css/desktop/index.css">
+}
+<div dir="rtl">
+<header class="hdr"><div class="wrap">
+<a href="/" style="display: flex; align-items: center; gap: 10px; color: var(--ink)"><svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="10" fill="#0F766E"></rect><circle cx="18" cy="18" r="8.5" fill="none" stroke="#fff" stroke-width="3"></circle><circle cx="18" cy="18" r="3" fill="#D4A017"></circle></svg><b style="font-size: 22px">شکار</b></a>
+<nav class="nav" aria-label="منوی اصلی"><a href="/hunts">شکارها</a><a href="/appraise">کارشناسی قیمت</a><a href="/plans">پلن‌ها</a><a href="/contact">تماس با ما</a></nav>
+<a href="/login" style="font-weight: 700; color: var(--ink-2)">ورود</a>
+<a href="/login" class="btn btn-p" style="min-height: 44px; padding: 0 20px; font-size: 15px; box-shadow: none">۲۴ ساعت رایگان شروع کن</a>
+</div></header>
+
+<main>
+<section class="hero" aria-labelledby="h1"><div class="wrap">
+<div style="display: flex; flex-direction: column; gap: 24px">
+<span class="eyebrow" style="align-self: flex-start; padding: 7px 14px; font-size: 14px"><span class="live"></span>امروز ۱۲,۴۸۰ آگهی خودروی تهران رو بررسی کردیم</span>
+<h1 id="h1" class="h1">ماشین زیر قیمت بازار رو <em>قبل از همه</em> شکار کن</h1>
+<p class="lead">هوش مصنوعی شکار همه‌ی آگهی‌ها رو لحظه‌ای می‌سنجه و فقط اونایی رو نشونت می‌ده که <b style="color: var(--ink)">زیر قیمت بازارن</b> و <b style="color: var(--ink)">زود فروش می‌رن</b>؛ با امتیاز و سود تخمینی.</p>
+<div style="display: flex; gap: 12px; flex-wrap: wrap"><a href="/login" class="btn btn-p" style="min-height: 56px; padding: 0 28px; font-size: 17px">دیدن شکارهای امروز</a><a href="/appraise" class="btn btn-s" style="min-height: 56px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1"></path><path d="M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"></path></svg>یه آگهی رو رایگان بسنج</a></div>
+<div class="trust"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg>۲۴ ساعت اول رایگان</span><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg>ماهی ۳ کارشناسی رایگان</span><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg>هر شهر فقط ۱۰۰ نفر</span></div>
+</div>
+<div style="position: relative; padding: 0 0 24px 28px">
+<div class="app" aria-label="نمونه‌ی لیست شکارهای امروز">
+<div class="app-top"><b style="display: flex; align-items: center; gap: 8px; font-size: 15px"><span class="live"></span>شکارهای امروز</b><span class="chip chip-teal" style="font-size: 12px; padding: 4px 10px">۳۷ شکار از ۱۲,۴۸۰ آگهی</span></div>
+<div class="row row-gold"><img src="~/assets/ads/peugeot-207.webp" alt="پژو ۲۰۷ پانوراما ۱۴۰۲">
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px"><div style="display: flex; align-items: center; gap: 8px"><b style="font-size: 15px">پژو ۲۰۷ پانوراما ۱۴۰۲</b><span class="chip chip-gold" style="font-size: 11px; padding: 2px 8px">فرصت طلایی</span></div>
+<div style="display: flex; align-items: baseline; gap: 8px"><b style="font-size: 16px">۱٫۳۴ میلیارد</b><s class="muted" style="font-size: 12px">بازار ۱٫۵۶</s></div>
+<div style="display: flex; gap: 6px"><span class="chip chip-teal" style="font-size: 11px; padding: 2px 8px">۱۴٪ زیر بازار</span><span class="chip chip-soft" style="font-size: 11px; padding: 2px 8px">سود ~۱۹۵ م</span><span class="muted" style="font-size: 11px; align-self: center">۳۵ دقیقه پیش</span></div></div>
+<span class="ring" style="width: 46px; height: 46px" role="img" aria-label="امتیاز ۸۷ از ۱۰۰"><svg width="46" height="46" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="16" fill="none" stroke="#F1F3F4" stroke-width="4"></circle><circle cx="20" cy="20" r="16" fill="none" stroke="#D4A017" stroke-width="4" stroke-linecap="round" stroke-dasharray="87.4 100.5" transform="rotate(-90 20 20)"></circle></svg><b style="font-size: 14px">۸۷</b></span></div><div class="row"><img src="~/assets/ads/changan-univ.webp" alt="چانگان یونی‌وی ۱۴۰۳">
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px"><div style="display: flex; align-items: center; gap: 8px"><b style="font-size: 15px">چانگان یونی‌وی ۱۴۰۳</b></div>
+<div style="display: flex; align-items: baseline; gap: 8px"><b style="font-size: 16px">۴٫۶ میلیارد</b><s class="muted" style="font-size: 12px">بازار ۵٫۲۳</s></div>
+<div style="display: flex; gap: 6px"><span class="chip chip-teal" style="font-size: 11px; padding: 2px 8px">۱۲٪ زیر بازار</span><span class="chip chip-soft" style="font-size: 11px; padding: 2px 8px">سود ~۵۴۰ م</span><span class="muted" style="font-size: 11px; align-self: center">۱ ساعت پیش</span></div></div>
+<span class="ring" style="width: 46px; height: 46px" role="img" aria-label="امتیاز ۸۰ از ۱۰۰"><svg width="46" height="46" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="16" fill="none" stroke="#F1F3F4" stroke-width="4"></circle><circle cx="20" cy="20" r="16" fill="none" stroke="#0F766E" stroke-width="4" stroke-linecap="round" stroke-dasharray="80.4 100.5" transform="rotate(-90 20 20)"></circle></svg><b style="font-size: 14px">۸۰</b></span></div><div class="row"><img src="~/assets/ads/tara.webp" alt="تارا اتوماتیک V4 ۱۴۰۳">
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px"><div style="display: flex; align-items: center; gap: 8px"><b style="font-size: 15px">تارا اتوماتیک V4 ۱۴۰۳</b></div>
+<div style="display: flex; align-items: baseline; gap: 8px"><b style="font-size: 16px">۱٫۸۹ میلیارد</b><s class="muted" style="font-size: 12px">بازار ۲٫۱۵</s></div>
+<div style="display: flex; gap: 6px"><span class="chip chip-teal" style="font-size: 11px; padding: 2px 8px">۱۲٪ زیر بازار</span><span class="chip chip-soft" style="font-size: 11px; padding: 2px 8px">سود ~۲۲۰ م</span><span class="muted" style="font-size: 11px; align-self: center">۲ ساعت پیش</span></div></div>
+<span class="ring" style="width: 46px; height: 46px" role="img" aria-label="امتیاز ۷۹ از ۱۰۰"><svg width="46" height="46" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="16" fill="none" stroke="#F1F3F4" stroke-width="4"></circle><circle cx="20" cy="20" r="16" fill="none" stroke="#0F766E" stroke-width="4" stroke-linecap="round" stroke-dasharray="79.4 100.5" transform="rotate(-90 20 20)"></circle></svg><b style="font-size: 14px">۷۹</b></span></div>
+<div style="padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; font-size: 13px"><span class="muted">مرتب‌شده بر اساس امتیاز</span><a href="/hunts" style="font-weight: 700">همه‌ی شکارها ←</a></div>
+</div>
+<div class="sms" role="note"><span style="width: 36px; height: 36px; border-radius: 12px; background: rgba(212,160,23,.18); color: var(--gold); display: grid; place-items: center; flex: none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 0112 0v5l1.5 2h-15z"></path><path d="M10 20.5a2 2 0 004 0"></path></svg></span><span style="font-size: 13px; line-height: 1.8"><b style="display: block; font-size: 14px">پیامک شکار تازه</b>پژو ۲۰۷ پانوراما · ۱۴٪ زیر بازار · سود ~۱۹۵ میلیون</span></div>
+</div>
+</div></section>
+
+<section class="section" aria-labelledby="how" style="padding-bottom: 72px"><div class="wrap">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 32px"><div style="display: flex; flex-direction: column; gap: 8px"><span class="kicker">شکار چطوری کار می‌کنه؟</span><h2 id="how" class="h2">از هزاران آگهی، فقط چندتا شکار</h2></div><p class="muted" style="max-width: 420px; line-height: 1.9">دیگه لازم نیست هر روز ساعت‌ها آگهی‌ها رو بالا پایین کنی؛ شکار این کار رو برات می‌کنه.</p></div>
+<div class="steps"><div class="step"><span class="n">۱</span><span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7V5a1 1 0 011-1h2M17 4h2a1 1 0 011 1v2M20 17v2a1 1 0 01-1 1h-2M7 20H5a1 1 0 01-1-1v-2M7 12h10"></path></svg></span><h3 style="font-size: 19px">همه‌ی آگهی‌ها رو می‌خونیم</h3><p class="muted" style="line-height: 1.9">هر آگهی خودروی تهران رو همون لحظه که منتشر می‌شه بررسی می‌کنیم.</p></div><div class="step"><span class="n">۲</span><span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"></path></svg></span><h3 style="font-size: 19px">قیمت و نقدشوندگی رو می‌سنجیم</h3><p class="muted" style="line-height: 1.9">با هزاران آگهی مشابه مقایسه می‌کنیم: زیر قیمت بازاره؟ زود فروش می‌ره؟</p></div><div class="step"><span class="n">۳</span><span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle></svg></span><h3 style="font-size: 19px">فقط شکارها رو بهت می‌دیم</h3><p class="muted" style="line-height: 1.9">بهترین‌ها با امتیاز و سود تخمینی تو لیستت میان؛ با پیامک هم خبرت می‌کنیم.</p></div></div>
+<div class="stats" aria-label="آمار امروز"><div><b>۱۲,۴۸۰</b><span>آگهی بررسی‌شده امروز</span></div><div><b style="color: var(--mint)">۳۷</b><span>شکار امروز</span></div><div><b>۱۲٪</b><span>میانگین زیر قیمت بازار</span></div><div><b>~۱۹۰ م</b><span>میانه‌ی سود هر شکار</span></div></div>
+</div></section>
+
+<section aria-label="کارشناسی رایگان و شهرها" style="padding-bottom: 88px"><div class="wrap duo">
+<div class="panel" style="background: linear-gradient(135deg, var(--teal), var(--teal-900)); color: #fff">
+<span class="chip" style="align-self: flex-start; background: #fff; color: var(--teal); font-size: 13px; padding: 5px 12px">ماهی ۳ تا رایگان · فقط با ثبت‌نام</span>
+<h2 style="font-size: 30px; font-weight: 800; line-height: 1.45">یه آگهی دیدی؟ لینکش رو بده، تو ۲۰ ثانیه می‌گیم می‌ارزه یا نه</h2>
+<p style="color: var(--teal-100); line-height: 1.9">امتیاز ۰ تا ۱۰۰، قیمت منصفانه‌ی بازار و ریسک‌های پنهان آگهی؛ بدون خرید اشتراک.</p>
+<form class="field" action="/appraise"><label for="lk" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">لینک آگهی</label><input id="lk" type="url" dir="ltr" placeholder="https://… لینک آگهی خودرو"><a href="/appraise" class="btn btn-p" style="box-shadow: none">رایگان بسنج</a></form>
+</div>
+<div class="panel card" style="background: var(--soft); border-color: #EDF0F0">
+<span class="kicker" style="display: flex; align-items: center; gap: 6px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0119 9.5C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>شهرهای شکار</span>
+<h2 style="font-size: 26px; font-weight: 800; line-height: 1.5">فعلاً تهران؛ به‌زودی شهر تو</h2>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px">
+<div class="city city-on"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0119 9.5C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg><span style="display: flex; flex-direction: column"><b>تهران</b><span style="font-size: 12px; color: var(--teal-100)">فعاله · ۲۳ جا مونده</span></span></div>
+<div class="city"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0119 9.5C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg><span style="display: flex; flex-direction: column"><b>کرج</b><span class="muted" style="font-size: 12px">به‌زودی</span></span></div>
+<div class="city"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0119 9.5C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg><span style="display: flex; flex-direction: column"><b>اصفهان</b><span class="muted" style="font-size: 12px">به‌زودی</span></span></div>
+<div class="city"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0119 9.5C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg><span style="display: flex; flex-direction: column"><b>مشهد</b><span class="muted" style="font-size: 12px">به‌زودی</span></span></div>
+</div>
+</div>
+</div></section>
+
+<section aria-labelledby="pl" style="padding-bottom: 88px"><div class="wrap plans">
+<div style="display: flex; flex-direction: column; gap: 14px; justify-content: center">
+<span class="kicker">پلن‌ها · پرداخت ماهانه</span>
+<h2 id="pl" class="h2">یه شکار خوب، هزینه‌ی چند سال اشتراکه</h2>
+<p class="muted" style="line-height: 1.9">۲۴ ساعت اول مهمون ما. هر شهر فقط ۱۰۰ اشتراک داره تا شکارها شلوغ نشن.</p>
+<div style="display: flex; justify-content: space-between; font-size: 14px; margin-top: 6px"><b>ظرفیت تهران</b><b style="color: var(--danger)">۲۳ جا مونده</b></div>
+<div class="cap" role="progressbar" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100" aria-label="ظرفیت پرشده‌ی تهران"><i></i></div>
+</div>
+<div class="plan">
+<b style="font-size: 20px">شکارچی</b>
+<div><b style="font-size: 36px">۹۹۰,۰۰۰</b> <span class="muted">تومان / ماه</span></div>
+<ul class="feat"><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg>همه‌ی شکارها، همون لحظه</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg>تحلیل کامل هر آگهی</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg>کارشناسی لینک نامحدود</li><li class="muted"><span style="width: 18px; text-align: center">–</span>پیامک شکارهای تازه</li></ul>
+<a href="/plans" class="btn btn-s">۲۴ ساعت رایگان امتحان کن</a>
+</div>
+<div class="plan plan-rec">
+<span class="chip" style="position: absolute; top: -13px; right: 24px; background: var(--teal); color: #fff; font-size: 12px; padding: 4px 12px">پیشنهاد ما</span>
+<b style="font-size: 20px">شکارچی حرفه‌ای</b>
+<div><b style="font-size: 36px">۱,۴۹۹,۰۰۰</b> <span class="muted">تومان / ماه</span></div>
+<ul class="feat"><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg>همه‌ی امکانات شکارچی</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg>پیامک شکارهای تازه‌ی هر دسته</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg>زنگوله‌ی «خبرم کن» ۲۴ ساعته</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg>اولویت در پشتیبانی</li></ul>
+<a href="/plans" class="btn btn-p">۲۴ ساعت رایگان امتحان کن</a>
+</div>
+</div></section>
+
+<section id="faq" aria-labelledby="fq" style="padding-bottom: 88px"><div class="wrap faq">
+<div style="display: flex; flex-direction: column; gap: 12px; position: sticky; top: 100px"><span class="kicker">سؤال‌های پرتکرار</span><h2 id="fq" class="h2">هرچی باید بدونی</h2><p class="muted" style="line-height: 1.9">جوابت اینجا نبود؟ <a href="/contact" style="font-weight: 700">بهمون پیام بده</a>؛ ۹ صبح تا ۶ عصر جواب می‌دیم.</p></div>
+<div><details class="q" open><summary>امتیاز شکار یعنی چی؟<span class="plus" aria-hidden="true" style="width: 28px; height: 28px; border-radius: 50%; background: var(--soft); display: grid; place-items: center; font-size: 18px; flex: none">+</span></summary><p class="muted" style="margin-top: 10px; line-height: 1.9">یه عدد از ۰ تا ۱۰۰ که از قیمت نسبت به بازار، نقدشوندگی، کارکرد، وضعیت فنی و ریسک ماشین درمیاد. ۸۵ به بالا یعنی «فرصت طلایی».</p></details><details class="q"><summary>شکارها رو از کجا میارین؟<span class="plus" aria-hidden="true" style="width: 28px; height: 28px; border-radius: 50%; background: var(--soft); display: grid; place-items: center; font-size: 18px; flex: none">+</span></summary><p class="muted" style="margin-top: 10px; line-height: 1.9">از آگهی‌های عمومی خودروی تهران؛ همون لحظه که منتشر می‌شن بررسی‌شون می‌کنیم.</p></details><details class="q"><summary>چرا هر شهر فقط ۱۰۰ نفر؟<span class="plus" aria-hidden="true" style="width: 28px; height: 28px; border-radius: 50%; background: var(--soft); display: grid; place-items: center; font-size: 18px; flex: none">+</span></summary><p class="muted" style="margin-top: 10px; line-height: 1.9">که هر شکار بین آدمای کمتری تقسیم بشه و شانس تو برای خرید بیشتر باشه. ظرفیت پر بشه، لیست انتظار باز می‌شه.</p></details><details class="q"><summary>کارشناسی رایگان چطوریه؟<span class="plus" aria-hidden="true" style="width: 28px; height: 28px; border-radius: 50%; background: var(--soft); display: grid; place-items: center; font-size: 18px; flex: none">+</span></summary><p class="muted" style="margin-top: 10px; line-height: 1.9">فقط با ثبت‌نام و بدون اشتراک، ماهی ۳ آگهی رو رایگان کارشناسی می‌کنیم. با اشتراک، نامحدوده.</p></details><details class="q"><summary>قیمت‌ها تضمینیه؟<span class="plus" aria-hidden="true" style="width: 28px; height: 28px; border-radius: 50%; background: var(--soft); display: grid; place-items: center; font-size: 18px; flex: none">+</span></summary><p class="muted" style="margin-top: 10px; line-height: 1.9">نه؛ تخمین هوش مصنوعیه. قبل از خرید حتماً ماشین رو کارشناسی کن.</p></details></div>
+</div></section>
+
+<section aria-label="شروع" style="padding-bottom: 72px"><div class="wrap"><div class="cta">
+<svg aria-hidden="true" width="260" height="260" viewBox="0 0 36 36" style="position: absolute; left: -50px; bottom: -90px; opacity: .08"><circle cx="18" cy="18" r="12" fill="none" stroke="#fff" stroke-width="3"></circle><circle cx="18" cy="18" r="4" fill="#fff"></circle></svg>
+<div style="display: flex; flex-direction: column; gap: 8px; position: relative"><h2 style="font-size: 30px; font-weight: 800">شکار امروزت منتظرته</h2><p style="color: var(--teal-100)">۲۴ ساعت رایگان؛ بدون نیاز به کارت بانکی.</p></div>
+<a href="/login" class="btn btn-w" style="min-height: 56px; padding: 0 32px; font-size: 17px; position: relative">همین الان شروع کن</a>
+</div></div></section>
+</main>
+
+<footer class="ftr"><div class="wrap">
+<span style="display: flex; align-items: center; gap: 8px; color: var(--ink)"><svg width="24" height="24" viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="10" fill="#0F766E"></rect><circle cx="18" cy="18" r="8.5" fill="none" stroke="#fff" stroke-width="3"></circle><circle cx="18" cy="18" r="3" fill="#D4A017"></circle></svg><b>شکار © ۱۴۰۵</b></span>
+<nav aria-label="فوتر" style="display: flex; gap: 22px"><a href="#" style="color: var(--muted)">قوانین</a><a href="#" style="color: var(--muted)">حریم خصوصی</a><a href="/contact" style="color: var(--muted)">تماس با ما</a><a href="/contact" style="color: var(--muted)">@@shekarai</a></nav>
+<span>قیمت و سود تخمینیه و تضمینی نیست؛ قبل از خرید حتماً کارشناسی کن.</span>
+</div></footer>
+</div>

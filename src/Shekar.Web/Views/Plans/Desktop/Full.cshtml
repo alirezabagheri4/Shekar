@@ -1,0 +1,112 @@
+@{
+    ViewData["Title"] = "پلن‌ها";
+}
+@section css {
+<link rel="stylesheet" href="~/css/desktop/base.css"><link rel="stylesheet" href="~/css/desktop/plans-city-full.css">
+}
+<div dir="rtl" style="font-family: Vazirmatn, Tahoma, sans-serif; color: #111827; background: #FFFFFF; min-height: 100vh; position: relative">
+<header style="position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.94); border-bottom: 1px solid #EEF0F2">
+<div style="max-width: 1240px; margin: 0 auto; padding: 0 32px; min-height: 72px; display: flex; align-items: center; gap: 36px">
+<a href="/" style="display: flex; align-items: center; gap: 10px; color: #111827"><svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="10" fill="#0F766E"></rect><circle cx="18" cy="18" r="8.5" fill="none" stroke="#fff" stroke-width="3"></circle><circle cx="18" cy="18" r="3" fill="#D4A017"></circle></svg><b style="font-size: 22px">شکار</b></a>
+<nav aria-label="منوی اصلی" style="display: flex; gap: 28px; flex: 1"><a href="/hunts" style="color: #374151; font-weight: 500">شکارها</a><a href="/appraise" style="color: #374151; font-weight: 500">کارشناسی قیمت</a><a href="/plans" aria-current="page" style="color: #0F766E; font-weight: 700">پلن‌ها</a><a href="/contact" style="color: #374151; font-weight: 500">تماس با ما</a></nav>
+<a href="/account" aria-label="حساب کاربری" style="width: 44px; height: 44px; border-radius: 50%; background: #E6F4F1; display: grid; place-items: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg></a>
+</div>
+</header>
+
+<main style="max-width: 1040px; margin: 0 auto; padding: 56px 24px 96px; display: flex; flex-direction: column; align-items: center; gap: 32px">
+<div style="text-align: center; display: flex; flex-direction: column; gap: 10px"><h1 style="margin: 0; font-size: 40px; font-weight: 800">پلنت رو انتخاب کن</h1><p style="margin: 0; color: #6B7280; font-size: 18px">شکارها رو قبل از همه ببین و جلو بیفت.</p></div>
+
+<span style="display: inline-flex; align-items: center; gap: 6px; background: #E6F4F1; color: #0F766E; font-weight: 700; font-size: 14px; padding: 6px 14px; border-radius: 999px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0119 9.5C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>شهر تو: تهران · پرداخت ماهانه</span>
+
+<section aria-labelledby="wl" style="width: 100%; max-width: 720px; background: #111827; color: #FFFFFF; border-radius: 24px; padding: 28px 32px; display: flex; gap: 24px; align-items: center; flex-wrap: wrap">
+<div style="position: relative; width: 96px; height: 96px; flex: none"><svg width="96" height="96" viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="40" fill="none" stroke="#374151" stroke-width="9"></circle><circle cx="48" cy="48" r="40" fill="none" stroke="#F87171" stroke-width="9" stroke-linecap="round"></circle></svg><div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.2"><b style="font-size: 17px">۱۰۰/۱۰۰</b><span style="font-size: 11px; color: #6B7280">پر شده</span></div></div>
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 8px">
+<span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; background: rgba(248,113,113,.15); color: #FCA5A5; font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 999px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0119 9.5C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>تهران</span>
+<h2 id="wl" style="margin: 0; font-size: 24px; font-weight: 800">ظرفیت تهران تکمیل شد!</h2>
+<p style="margin: 0; color: #D1D5DB; font-size: 15px; line-height: 1.8">هر شهر فقط ۱۰۰ اشتراک داره تا هر شکار بین آدمای کمتری تقسیم بشه. اسمت رو تو لیست انتظار بنویس؛ جا که باز شد، اول به تو پیامک می‌دیم.</p>
+<div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px"><label for="wlp" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">شماره موبایل</label><input id="wlp" type="tel" dir="ltr" value="۰۹۱۲ ۳۴۵ ۶۷۸۹" style="flex: 1 1 200px; min-height: 52px; border-radius: 12px; border: 0; padding: 0 16px; font-size: 16px; font-family: inherit; text-align: right"><button class="zbtn" style="background: #0F766E; color: #FFFFFF; min-height: 52px">ثبت در لیست انتظار</button></div>
+
+</div>
+</section>
+
+<div style="width: 100%; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 24px; align-items: stretch">
+
+<div class="zplan" style="border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 16px; position: relative; background: #FFFFFF">
+
+<b style="font-size: 24px">شکارچی</b>
+<div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap"><span style="font-size: 36px; font-weight: 800">۹۹۰,۰۰۰</span><span style="color: #6B7280">تومان / ماه</span></div>
+<span style="color: #6B7280; font-size: 14px; min-height: 22px">برای شروع کافیه</span>
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; flex: 1">
+
+<li style="display: flex; align-items: center; gap: 10px; color: #111827">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2.6" stroke-linecap="round" aria-label="دارد" role="img"><path d="M5 12l5 5 9-10"></path></svg>
+
+<span>شکارها در لحظه، همه‌ی دسته‌ها</span><b style="margin-right: auto; font-size: 14px"></b>
+</li>
+
+<li style="display: flex; align-items: center; gap: 10px; color: #111827">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2.6" stroke-linecap="round" aria-label="دارد" role="img"><path d="M5 12l5 5 9-10"></path></svg>
+
+<span>تحلیل کامل هر آگهی</span><b style="margin-right: auto; font-size: 14px"></b>
+</li>
+
+<li style="display: flex; align-items: center; gap: 10px; color: #111827">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2.6" stroke-linecap="round" aria-label="دارد" role="img"><path d="M5 12l5 5 9-10"></path></svg>
+
+<span>کارشناسی لینک آگهی</span><b style="margin-right: auto; font-size: 14px">نامحدود</b>
+</li>
+
+<li style="display: flex; align-items: center; gap: 10px; color: #6B7280">
+
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.6" stroke-linecap="round" aria-label="ندارد" role="img"><path d="M6 12h12"></path></svg>
+<span>پیامک شکارهای تازه‌ی هر دسته</span><b style="margin-right: auto; font-size: 14px"></b>
+</li>
+
+</ul>
+
+<span class="zbtn" style="background: #F3F4F6; color: #6B7280; cursor: default">ظرفیت تهران تکمیله</span>
+</div>
+
+<div class="zplan zplan-rec" style="border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 16px; position: relative; background: #FFFFFF">
+<span style="position: absolute; top: -14px; right: 28px; background: #0F766E; color: #FFFFFF; font-size: 13px; font-weight: 700; padding: 4px 14px; border-radius: 999px">پیشنهادی</span>
+<b style="font-size: 24px">شکارچی حرفه‌ای</b>
+<div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap"><span style="font-size: 36px; font-weight: 800">۱,۴۹۹,۰۰۰</span><span style="color: #6B7280">تومان / ماه</span></div>
+<span style="color: #6B7280; font-size: 14px; min-height: 22px">همه‌چیز + پیامک شکارهای تازه</span>
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; flex: 1">
+
+<li style="display: flex; align-items: center; gap: 10px; color: #111827">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2.6" stroke-linecap="round" aria-label="دارد" role="img"><path d="M5 12l5 5 9-10"></path></svg>
+
+<span>شکارها در لحظه، همه‌ی دسته‌ها</span><b style="margin-right: auto; font-size: 14px"></b>
+</li>
+
+<li style="display: flex; align-items: center; gap: 10px; color: #111827">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2.6" stroke-linecap="round" aria-label="دارد" role="img"><path d="M5 12l5 5 9-10"></path></svg>
+
+<span>تحلیل کامل هر آگهی</span><b style="margin-right: auto; font-size: 14px"></b>
+</li>
+
+<li style="display: flex; align-items: center; gap: 10px; color: #111827">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2.6" stroke-linecap="round" aria-label="دارد" role="img"><path d="M5 12l5 5 9-10"></path></svg>
+
+<span>کارشناسی لینک آگهی</span><b style="margin-right: auto; font-size: 14px">نامحدود</b>
+</li>
+
+<li style="display: flex; align-items: center; gap: 10px; color: #111827">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2.6" stroke-linecap="round" aria-label="دارد" role="img"><path d="M5 12l5 5 9-10"></path></svg>
+
+<span>پیامک شکارهای تازه‌ی هر دسته</span><b style="margin-right: auto; font-size: 14px">۲۴ ساعته</b>
+</li>
+
+</ul>
+
+<span class="zbtn" style="background: #F3F4F6; color: #6B7280; cursor: default">ظرفیت تهران تکمیله</span>
+</div>
+
+</div>
+<a href="/appraise" style="width: 100%; border: 1.5px dashed #0F766E; border-radius: 16px; padding: 16px 20px; display: flex; gap: 12px; align-items: center; color: #111827"><span style="width: 40px; height: 40px; border-radius: 12px; background: #E6F4F1; display: grid; place-items: center; flex: none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2" aria-hidden="true"><path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1"></path><path d="M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"></path></svg></span><span style="flex: 1; font-size: 15px"><b>هنوز مطمئن نیستی؟</b> بدون اشتراک و فقط با ثبت‌نام، <b style="color: #0F766E">ماهی ۳ آگهی رو رایگان کارشناسی کن.</b></span><b style="color: #0F766E; white-space: nowrap">امتحان کن ←</b></a>
+<div style="width: 100%; background: #E6F4F1; border-radius: 16px; padding: 16px 20px; display: flex; gap: 12px; align-items: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="1.8" aria-hidden="true" style="flex: none"><path d="M6 16V11a6 6 0 0112 0v5l1.5 2h-15z"></path><path d="M10 20.5a2 2 0 004 0"></path></svg><span style="font-size: 15px"><b>«خبرم کن» چطوریه؟</b> زنگوله‌ی هر دسته رو بزنی، تا ۲۴ ساعت هر شکار تازه‌ی اون دسته رو برات پیامک می‌کنیم.</span></div>
+<p style="margin: 0; color: #6B7280; font-size: 14px">فقط پرداخت ماهانه · پرداخت امن با درگاه بانکی · هر ماه خودت تمدید کن</p>
+</main>
+
+</div>
