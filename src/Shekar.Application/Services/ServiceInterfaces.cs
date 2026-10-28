@@ -1,0 +1,70 @@
+using Shekar.Application.Contracts;
+using Shekar.Domain.Enums;
+
+namespace Shekar.Application.Services;
+
+/// <summary>لیست و جزئیات شکارها (R4، R7، R8، R9، R11).</summary>
+public interface IHuntService
+{
+    Task<HuntListDto> GetListAsync(PriceCategory? category, HuntDay day, HuntSortOrder sort, CancellationToken ct = default);
+    Task<HuntDetailDto> GetDetailAsync(int id, CancellationToken ct = default);
+    Task<IReadOnlyList<CategorySummaryDto>> GetCategoriesAsync(CancellationToken ct = default);
+}
+
+/// <summary>کارشناسی قیمت (R5).</summary>
+public interface IAppraisalService
+{
+    Task<AppraisalQuotaDto> GetQuotaAsync(CancellationToken ct = default);
+    Task<AppraisalResultDto> AppraiseAsync(AppraisalRequestDto request, CancellationToken ct = default);
+    Task<IReadOnlyList<AppraisalHistoryItemDto>> GetHistoryAsync(CancellationToken ct = default);
+}
+
+/// <summary>اشتراک‌ها (R1، R2، R3).</summary>
+public interface ISubscriptionService
+{
+    Task<SubscriptionStatusDto> GetStatusAsync(CancellationToken ct = default);
+    Task<SubscriptionStatusDto> GetStatusForUserAsync(int userId, CancellationToken ct = default);
+    Task<PurchaseResultDto> StartTrialAsync(StartSubscriptionRequestDto request, CancellationToken ct = default);
+    Task<PurchaseResultDto> PurchaseAsync(StartSubscriptionRequestDto request, CancellationToken ct = default);
+}
+
+/// <summary>ظرفیت شهر (R1).</summary>
+public interface ICapacityService
+{
+    Task<CityCapacityDto> GetAsync(int cityId, CancellationToken ct = default);
+}
+
+/// <summary>لیست انتظار (R1).</summary>
+public interface IWaitlistService
+{
+    Task<WaitlistPositionDto> JoinAsync(WaitlistJoinRequestDto request, CancellationToken ct = default);
+}
+
+/// <summary>زنگوله‌ی «خبرم کن» (R6).</summary>
+public interface IBellService
+{
+    Task<IReadOnlyList<BellToggleResultDto>> ListAsync(CancellationToken ct = default);
+    Task<BellToggleResultDto> ToggleAsync(BellToggleRequestDto request, CancellationToken ct = default);
+}
+
+/// <summary>پلن‌ها.</summary>
+public interface IPlanService
+{
+    Task<IReadOnlyList<PlanDto>> ListAsync(CancellationToken ct = default);
+}
+
+/// <summary>ورود با موبایل + OTP.</summary>
+public interface IAuthService
+{
+    Task RequestOtpAsync(RequestOtpDto request, CancellationToken ct = default);
+    Task<AuthResultDto> VerifyOtpAsync(VerifyOtpDto request, CancellationToken ct = default);
+    Task CompleteProfileAsync(int userId, CompleteProfileDto request, CancellationToken ct = default);
+}
+
+/// <summary>ساعت پشتیبانی (R12).</summary>
+public interface ISupportService
+{
+    bool IsOpenNow();
+    string HoursLabel { get; }
+    string StatusLabel { get; }
+}

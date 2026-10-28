@@ -1,0 +1,83 @@
+using Shekar.Domain.Entities;
+using Shekar.Domain.Enums;
+
+namespace Shekar.Application.Abstractions;
+
+/// <summary>فیلترهای واکشی لیست شکارها (R11).</summary>
+public sealed record HuntQuery(
+    int CityId,
+    PriceCategory? Category,
+    HuntDay Day,
+    HuntSortOrder Sort);
+
+public interface ICityRepository
+{
+    Task<City?> GetAsync(int id, CancellationToken ct = default);
+    Task<City?> GetBySlugAsync(string slug, CancellationToken ct = default);
+    Task<IReadOnlyList<City>> ListAsync(CancellationToken ct = default);
+}
+
+public interface IPlanRepository
+{
+    Task<IReadOnlyList<Plan>> ListAsync(CancellationToken ct = default);
+    Task<Plan?> GetAsync(PlanType type, CancellationToken ct = default);
+}
+
+public interface IUserRepository
+{
+    Task<User?> GetAsync(int id, CancellationToken ct = default);
+    Task<User?> GetByMobileAsync(string mobile, CancellationToken ct = default);
+    Task<User> AddAsync(User user, CancellationToken ct = default);
+    Task UpdateAsync(User user, CancellationToken ct = default);
+}
+
+public interface ISubscriptionRepository
+{
+    Task<Subscription?> GetActiveForUserAsync(int userId, DateTimeOffset now, CancellationToken ct = default);
+
+    /// <summary>R1 — تعداد اشتراک‌های فعال (Trial + Active و منقضی‌نشده) یک شهر.</summary>
+    Task<int> CountActiveInCityAsync(int cityId, DateTimeOffset now, CancellationToken ct = default);
+
+    Task<Subscription> AddAsync(Subscription subscription, CancellationToken ct = default);
+}
+
+public interface IHuntRepository
+{
+    Task<IReadOnlyList<Hunt>> QueryAsync(HuntQuery query, CancellationToken ct = default);
+
+    /// <summary>همه‌ی شکارهای امروزِ یک شهر (برای بنر قفل و شمارش دسته‌ها).</summary>
+    Task<IReadOnlyList<Hunt>> ListTodayAsync(int cityId, CancellationToken ct = default);
+
+    Task<Hunt?> GetAsync(int id, CancellationToken ct = default);
+}
+
+public interface IAppraisalRepository
+{
+    /// <summary>R5 — تعداد کارشناسی‌های کاربر در بازه‌ی [from, to).</summary>
+    Task<int> CountForUserInRangeAsync(int userId, DateTimeOffset fromUtc, DateTimeOffset toUtc, CancellationToken ct = default);
+
+    Task<IReadOnlyList<Appraisal>> ListForUserAsync(int userId, CancellationToken ct = default);
+
+    Task<Appraisal> AddAsync(Appraisal appraisal, CancellationToken ct = default);
+}
+
+public interface IBellAlertRepository
+{
+    Task<IReadOnlyList<BellAlert>> ListForUserAsync(int userId, CancellationToken ct = default);
+    Task<BellAlert?> GetAsync(int userId, PriceCategory category, CancellationToken ct = default);
+    Task UpsertAsync(BellAlert alert, CancellationToken ct = default);
+}
+
+public interface IWaitlistRepository
+{
+    Task<WaitlistEntry?> GetAsync(int cityId, string mobile, CancellationToken ct = default);
+    Task<int> CountForCityAsync(int cityId, CancellationToken ct = default);
+    Task<WaitlistEntry> AddAsync(WaitlistEntry entry, CancellationToken ct = default);
+}
+
+public interface IOtpRepository
+{
+    Task<OtpCode?> GetLatestAsync(string mobile, CancellationToken ct = default);
+    Task AddAsync(OtpCode code, CancellationToken ct = default);
+    Task UpdateAsync(OtpCode code, CancellationToken ct = default);
+}
