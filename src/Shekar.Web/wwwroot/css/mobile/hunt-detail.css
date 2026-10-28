@@ -1,0 +1,11 @@
+body{margin:0;background:#FFFFFF}
+button{font-family:inherit}
+.zbox{border:1px solid #E5E7EB;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:14px}
+.zbtn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:54px;border-radius:14px;font-weight:700;font-size:16px;border:0}
+.zbtn-p{background:#0F766E;color:#FFFFFF}
+.zbtn-p:hover{color:#FFFFFF}
+.zbtn-off{background:#E5E7EB;color:#6B7280;pointer-events:none}
+.zdot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.6);border:0;padding:0}
+.zdot-on{background:#FFFFFF;width:20px;border-radius:4px}
+.zrow{display:flex;align-items:center;justify-content:space-between;min-height:54px;color:#111827;border-bottom:1px solid #EEF0F2}
+.zgone{filter:grayscale(1);opacity:.7}

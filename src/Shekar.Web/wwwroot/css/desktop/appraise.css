@@ -1,0 +1,9 @@
+body{margin:0;background:#FFFFFF}
+button,input{font-family:inherit}
+.zbtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:0 28px;border-radius:14px;font-weight:700;font-size:17px;border:0;cursor:pointer;white-space:nowrap}
+.zbtn-g{background:#F6F8F8;color:#111827}
+.zfield{flex:1 1 320px;display:flex;align-items:center;gap:8px;min-height:56px;border:1.5px solid #E5E7EB;border-radius:14px;padding:0 8px 0 14px;background:#FFFFFF}
+.zfield:focus-within{border-color:#0F766E;box-shadow:0 0 0 3px #E6F4F1}
+.zfield-err{border-color:#DC2626;box-shadow:0 0 0 3px #FEE2E2}
+.zfield input{flex:1;min-width:0;border:0;outline:none;font-size:16px;color:#111827;background:transparent;height:52px}
+.zpaste{min-height:40px;padding:0 12px;border-radius:10px;border:0;background:#E6F4F1;color:#0F766E;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px}

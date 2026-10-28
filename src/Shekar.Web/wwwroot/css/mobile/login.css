@@ -1,0 +1,18 @@
+body{margin:0;background:#FFFFFF}
+a:hover{color:#0B5D57}
+button,input{font-family:inherit}
+.zbtn{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;border-radius:12px;font-weight:700;font-size:16px;border:0;cursor:pointer}
+.zbtn-p{background:#0F766E;color:#FFFFFF}
+.zbtn-p:hover{color:#FFFFFF}
+.zbtn-off{background:#E5E7EB;color:#6B7280;cursor:not-allowed}
+.zin{width:100%;min-height:52px;border:1.5px solid #E5E7EB;border-radius:12px;padding:0 14px;font-size:16px;color:#111827;background:#FFFFFF;outline:none}
+.zin:focus{border-color:#0F766E;box-shadow:0 0 0 3px #E6F4F1}
+.zin-err{border-color:#DC2626}
+.zotp{width:58px;height:62px;text-align:center;font-size:24px;font-weight:700;border:1.5px solid #E5E7EB;border-radius:12px;outline:none;color:#111827}
+.zotp:focus{border-color:#0F766E;box-shadow:0 0 0 3px #E6F4F1}
+.zotp-ok{border-color:#0F766E}
+.zotp-err{border-color:#DC2626;color:#DC2626}
+.zlink{background:none;border:0;color:#0F766E;font-weight:700;cursor:pointer;padding:8px 0;font-size:14px;min-height:44px}
+.zopt{display:block;width:100%;text-align:right;background:#FFFFFF;border:0;padding:12px 14px;font-size:15px;cursor:pointer;color:#111827;min-height:44px}
+.zopt:hover{background:#E6F4F1}
+.zbeam{position:absolute;top:10%;bottom:14%;width:2px;background:#0F766E;box-shadow:0 0 20px 5px rgba(15,118,110,.28);}

@@ -1,0 +1,13 @@
+body{margin:0;background:#F6F8F8}
+button{font-family:inherit}
+.zbox{background:#FFFFFF;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:14px}
+.zbtn{display:flex;align-items:center;justify-content:center;flex:1;min-height:48px;border-radius:12px;font-weight:700;font-size:15px;border:0;cursor:pointer}
+.zbtn-p{background:#0F766E;color:#FFFFFF}
+.zbtn-p:hover{color:#FFFFFF}
+.zbtn-s{background:#FFFFFF;color:#0F766E;border:1.5px solid #0F766E}
+.zsw{width:52px;height:30px;border-radius:999px;border:0;background:#D1D5DB;position:relative;cursor:pointer;flex:none}
+.zsw::after{content:"";position:absolute;top:3px;right:3px;width:24px;height:24px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.zsw-on{background:#0F766E}
+.zsw-on::after{right:25px}
+.znav{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;min-height:56px;justify-content:center;font-size:11px;color:#6B7280}
+.znav-on{color:#0F766E;font-weight:700}

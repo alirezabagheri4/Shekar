@@ -1,0 +1,5 @@
+body{margin:0;background:#F6F8F8}
+button{font-family:inherit}
+.zbtn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;border-radius:12px;font-weight:700;font-size:16px;border:0;cursor:pointer}
+.zbtn-s{background:#FFFFFF;color:#0F766E;border:1.5px solid #0F766E}
+.zbtn-s:hover{background:#E6F4F1;color:#0F766E}
