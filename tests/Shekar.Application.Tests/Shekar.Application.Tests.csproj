@@ -26,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Shekar.Application\Shekar.Application.csproj" />
     <ProjectReference Include="..\..\src\Shekar.Domain\Shekar.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Shekar.Mock\Shekar.Mock.csproj" />
   </ItemGroup>
 
 </Project>

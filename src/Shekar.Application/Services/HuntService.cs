@@ -103,8 +103,8 @@ public sealed class HuntService : IHuntService
 
         IReadOnlyList<Hunt> today = await _hunts.ListTodayAsync(cityId, ct);
 
-        Dictionary<PriceCategory, int> activeByCategory = today
-            .Where(h => h.State == HuntState.Active)
+        // شمارش دسته‌ها همه‌ی شکارهای امروز (شاملِ حذف‌شده‌ها) را در بر می‌گیرد؛ مطابق سایدبار نمونه.
+        Dictionary<PriceCategory, int> countByCategory = today
             .GroupBy(h => DomainConstants.ResolveCategory(h.PriceToman))
             .ToDictionary(g => g.Key, g => g.Count());
 
@@ -123,7 +123,7 @@ public sealed class HuntService : IHuntService
         {
             Category = band.Category,
             Label = band.Label,
-            TodayCount = activeByCategory.GetValueOrDefault(band.Category),
+            TodayCount = countByCategory.GetValueOrDefault(band.Category),
             ImageFileName = CategoryImages.GetValueOrDefault(band.Category),
             BellOn = onBells.Contains(band.Category)
         }).ToList();
