@@ -17,6 +17,13 @@ public sealed record CategoriesViewModel(
 
 public sealed record AppraiseViewModel(AppraisalQuotaDto Quota);
 
+public sealed record PaySuccessViewModel(
+    string PlanName,
+    string Amount,
+    string ExpiresLabel,
+    string TrackingCode,
+    bool IsTrial);
+
 public sealed record LoginOtpViewModel(string Mobile);
 
 public sealed record LoginProfileViewModel(IReadOnlyList<(int Id, string Name, bool IsActive)> Cities);

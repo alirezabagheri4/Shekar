@@ -1,3 +1,4 @@
+@model PaySuccessViewModel
 @{
     ViewData["Title"] = "پرداخت موفق";
 }
@@ -6,18 +7,16 @@
 }
 <div dir="rtl" style="font-family: Vazirmatn, Tahoma, sans-serif; color: #111827; background: #F6F8F8; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 24px">
 <div style="width: 100%; max-width: 480px; background: #FFFFFF; border-radius: 24px; padding: 40px 36px; box-shadow: 0 16px 48px rgba(17,24,39,.06); display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center">
-
 <div style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 24px">
 <span class="zpop" style="width: 80px; height: 80px; border-radius: 50%; background: #0F766E; display: grid; place-items: center"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></span>
-<div><h1 style="margin: 0 0 6px; font-size: 26px; font-weight: 800">تبریک! پرداختت موفق بود</h1><p style="margin: 0; color: #6B7280">به جمع شکارچی‌ها خوش اومدی.</p></div>
+<div><h1 style="margin: 0 0 6px; font-size: 26px; font-weight: 800">@(Model.IsTrial ? "۲۴ ساعت رایگانت شروع شد!" : "تبریک! پرداختت موفق بود")</h1><p style="margin: 0; color: #6B7280">به جمع شکارچی‌ها خوش اومدی.</p></div>
 <dl style="width: 100%; margin: 0; background: #F6F8F8; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 12px; font-size: 15px">
-<div style="display: flex; justify-content: space-between"><dt style="color: #6B7280">پلن</dt><dd style="margin: 0; font-weight: 700">شکارچی حرفه‌ای</dd></div>
-<div style="display: flex; justify-content: space-between"><dt style="color: #6B7280">مبلغ</dt><dd style="margin: 0; font-weight: 700">۱,۴۹۹,۰۰۰ تومان</dd></div>
-<div style="display: flex; justify-content: space-between"><dt style="color: #6B7280">اعتبار تا</dt><dd style="margin: 0; font-weight: 700">۳۰ آبان ۱۴۰۵</dd></div>
-<div style="display: flex; justify-content: space-between"><dt style="color: #6B7280">کد پیگیری</dt><dd dir="ltr" style="margin: 0; font-weight: 700">۸۴۲۱۹۳۰۷</dd></div>
+<div style="display: flex; justify-content: space-between"><dt style="color: #6B7280">پلن</dt><dd style="margin: 0; font-weight: 700">@Model.PlanName</dd></div>
+<div style="display: flex; justify-content: space-between"><dt style="color: #6B7280">مبلغ</dt><dd style="margin: 0; font-weight: 700">@Model.Amount</dd></div>
+<div style="display: flex; justify-content: space-between"><dt style="color: #6B7280">اعتبار تا</dt><dd style="margin: 0; font-weight: 700">@Model.ExpiresLabel</dd></div>
+<div style="display: flex; justify-content: space-between"><dt style="color: #6B7280">کد پیگیری</dt><dd dir="ltr" style="margin: 0; font-weight: 700">@Model.TrackingCode</dd></div>
 </dl>
 <a href="/hunts" class="zbtn zbtn-p">دیدن شکارها</a>
 </div>
-
 </div>
 </div>
