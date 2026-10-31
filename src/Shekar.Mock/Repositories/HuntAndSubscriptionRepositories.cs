@@ -48,10 +48,12 @@ public sealed class MockHuntRepository : IHuntRepository
     public Task<IReadOnlyList<Hunt>> QueryAsync(HuntQuery query, CancellationToken ct = default)
     {
         DateTime target = _clock.TehranNow.Date.AddDays(-(int)query.Day);
+        HashSet<string> blocked = ActiveBlockedPhones();
 
         IEnumerable<Hunt> result = _store.Hunts.Where(h =>
             h.CityId == query.CityId
-            && TehranTime.ToTehran(h.PublishedAt).Date == target);
+            && TehranTime.ToTehran(h.PublishedAt).Date == target
+            && !IsBlocked(h, blocked));
 
         if (query.Category is { } category)
         {
@@ -64,10 +66,24 @@ public sealed class MockHuntRepository : IHuntRepository
     public Task<IReadOnlyList<Hunt>> ListTodayAsync(int cityId, CancellationToken ct = default)
     {
         DateTime today = _clock.TehranNow.Date;
+        HashSet<string> blocked = ActiveBlockedPhones();
         return Task.FromResult<IReadOnlyList<Hunt>>(_store.Hunts
-            .Where(h => h.CityId == cityId && TehranTime.ToTehran(h.PublishedAt).Date == today)
+            .Where(h => h.CityId == cityId && TehranTime.ToTehran(h.PublishedAt).Date == today && !IsBlocked(h, blocked))
             .ToList());
     }
+
+    // شماره‌های بلاک فعال؛ آگهی‌هایشان از پیشنهادهای روزانه حذف می‌شود (ضد دلال/اسپم).
+    private HashSet<string> ActiveBlockedPhones()
+    {
+        DateTimeOffset now = _clock.UtcNow;
+        return _store.BlockedAdvertisers
+            .Where(b => b.IsActive && (b.ExpiresAt == null || b.ExpiresAt > now))
+            .Select(b => b.Phone)
+            .ToHashSet();
+    }
+
+    private static bool IsBlocked(Hunt h, HashSet<string> blocked) =>
+        h.AdvertiserPhone is { } phone && blocked.Contains(phone);
 
     public Task<Hunt?> GetAsync(int id, CancellationToken ct = default) =>
         Task.FromResult(_store.Hunts.FirstOrDefault(h => h.Id == id));

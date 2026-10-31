@@ -81,3 +81,36 @@ public interface IOtpRepository
     Task AddAsync(OtpCode code, CancellationToken ct = default);
     Task UpdateAsync(OtpCode code, CancellationToken ct = default);
 }
+
+public interface IAdvertiserRepository
+{
+    Task<Advertiser?> GetByPhoneAsync(string phone, CancellationToken ct = default);
+    Task<IReadOnlyList<Advertiser>> ListAsync(CancellationToken ct = default);
+    Task UpsertAsync(Advertiser advertiser, CancellationToken ct = default);
+}
+
+public interface IBlockedAdvertiserRepository
+{
+    /// <summary>آیا این شماره هم‌اکنون بلاک فعال دارد.</summary>
+    Task<bool> IsBlockedAsync(string phone, DateTimeOffset now, CancellationToken ct = default);
+
+    /// <summary>فهرست شماره‌های بلاک فعال (برای حذف از پیشنهادهای روزانه).</summary>
+    Task<IReadOnlyList<string>> ListActivePhonesAsync(DateTimeOffset now, CancellationToken ct = default);
+
+    Task<IReadOnlyList<BlockedAdvertiser>> ListAsync(CancellationToken ct = default);
+    Task<BlockedAdvertiser> AddAsync(BlockedAdvertiser entry, CancellationToken ct = default);
+    Task UpdateAsync(BlockedAdvertiser entry, CancellationToken ct = default);
+}
+
+public interface IPlanLimitRepository
+{
+    Task<PlanLimit?> GetByPlanAsync(int planId, CancellationToken ct = default);
+    Task<IReadOnlyList<PlanLimit>> ListAsync(CancellationToken ct = default);
+}
+
+public interface ISystemSettingRepository
+{
+    Task<SystemSetting?> GetAsync(string key, CancellationToken ct = default);
+    Task<IReadOnlyList<SystemSetting>> ListAsync(CancellationToken ct = default);
+    Task UpsertAsync(SystemSetting setting, CancellationToken ct = default);
+}

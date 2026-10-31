@@ -93,6 +93,26 @@ public class MockIntegrationTests
     }
 
     [Fact]
+    public async Task BlockedAdvertiser_ExcludedFromDailyHunts()
+    {
+        // یک شکار فعال با شماره‌ی آگهی‌دهنده برمی‌داریم و آن شماره را بلاک می‌کنیم.
+        var hunt = _store.Hunts.First(h => h.State == HuntState.Active && h.AdvertiserPhone != null);
+        var repo = new MockHuntRepository(_store, _clock);
+        var before = await repo.QueryAsync(new Shekar.Application.Abstractions.HuntQuery(1, null, HuntDay.Today, HuntSortOrder.TopScore));
+        Assert.Contains(before, h => h.Id == hunt.Id);
+
+        _store.BlockedAdvertisers.Add(new Shekar.Domain.Entities.BlockedAdvertiser
+        {
+            Id = 99, Phone = hunt.AdvertiserPhone!, Reason = Shekar.Domain.Enums.BlockReason.TooManyAds,
+            BlockedAt = _clock.UtcNow, IsActive = true
+        });
+
+        var after = await repo.QueryAsync(new Shekar.Application.Abstractions.HuntQuery(1, null, HuntDay.Today, HuntSortOrder.TopScore));
+        Assert.DoesNotContain(after, h => h.Id == hunt.Id);
+        Assert.Equal(before.Count - 1, after.Count);
+    }
+
+    [Fact]
     public void Jalali_MonthRangeContainsNow()
     {
         var (startUtc, nextUtc) = _jalali.GetMonthRangeUtc(_clock.TehranNow);

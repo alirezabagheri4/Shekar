@@ -48,6 +48,9 @@ public class Hunt
     /// <summary>نام فایل تصویر در wwwroot/assets/ads؛ <c>null</c> یعنی تصویر placeholder.</summary>
     public string? ImageFileName { get; set; }
 
+    /// <summary>شماره‌ی آگهی‌دهنده؛ برای حذف آگهی‌های شماره‌های بلاک‌شده از پیشنهادها.</summary>
+    public string? AdvertiserPhone { get; set; }
+
     /// <summary>تحلیل تفصیلی برای صفحه‌ی جزئیات؛ ممکن است هنوز موجود نباشد.</summary>
     public HuntAnalysis? Analysis { get; set; }
 }

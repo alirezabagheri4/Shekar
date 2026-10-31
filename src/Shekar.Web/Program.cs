@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Shekar.Application;
 using Shekar.Application.Abstractions;
+using Shekar.Infrastructure;
 using Shekar.Mock;
 using Shekar.Web.Infrastructure;
 
@@ -18,9 +19,22 @@ builder.Services.AddScoped<IDeviceContext>(sp => sp.GetRequiredService<DeviceCon
 builder.Services.Configure<RazorViewEngineOptions>(options =>
     options.ViewLocationExpanders.Add(new DeviceViewLocationExpander()));
 
-// لایه‌های برنامه؛ پیش‌فرض Mock.
+// لایه‌های برنامه. انتخاب منبع داده با تنظیم «Persistence»: «Mock» (پیش‌فرض) یا «SqlServer».
 builder.Services.AddApplicationServices();
-builder.Services.AddMockInfrastructure();
+
+string persistence = builder.Configuration["Persistence"] ?? "Mock";
+if (string.Equals(persistence, "SqlServer", StringComparison.OrdinalIgnoreCase))
+{
+    // Repositoryهای واقعی EF Core 6 + سرویس‌های زیرساختی مشترک (ساعت/تقویم/پیامک/…).
+    string conn = builder.Configuration.GetConnectionString("Shekar")
+        ?? throw new InvalidOperationException("ConnectionStrings:Shekar تنظیم نشده است.");
+    builder.Services.AddMockSupportServices();
+    builder.Services.AddSqlServerInfrastructure(conn);
+}
+else
+{
+    builder.Services.AddMockInfrastructure();
+}
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICurrentUser, CurrentUser>();

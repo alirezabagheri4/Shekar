@@ -22,6 +22,10 @@ public sealed class MockDataStore
     public List<BellAlert> BellAlerts { get; } = new();
     public List<WaitlistEntry> Waitlist { get; } = new();
     public List<OtpCode> Otps { get; } = new();
+    public List<PlanLimit> PlanLimits { get; } = new();
+    public List<SystemSetting> SystemSettings { get; } = new();
+    public List<Advertiser> Advertisers { get; } = new();
+    public List<BlockedAdvertiser> BlockedAdvertisers { get; } = new();
 
     /// <summary>شناسه‌ی کاربر نمونه‌ی لاگین‌شده (کامران رضایی، مشترک حرفه‌ای).</summary>
     public const int DemoUserId = 1;
@@ -105,6 +109,81 @@ public sealed class MockDataStore
         SeedHunts(now);
         SeedBells(now);
         SeedAppraisals(now);
+        SeedModeration(now);
+
+        // هر شکار یک شماره‌ی آگهی‌دهنده دارد تا فیلتر شماره‌های بلاک‌شده قابل‌استفاده باشد.
+        foreach (Hunt h in Hunts)
+        {
+            h.AdvertiserPhone ??= $"09120{h.Id:0000}00";
+        }
+    }
+
+    private void SeedPlanLimits()
+    {
+        // شکارچی: کارشناسی نامحدود، بدون «خبرم کن»، دارای ۲۴ ساعت رایگان.
+        PlanLimits.Add(new PlanLimit
+        {
+            PlanId = 1,
+            UnlimitedAppraisals = true,
+            MonthlyAppraisalLimit = null,
+            AllowBellAlerts = false,
+            BellAlertDurationHours = 24,
+            MaxActiveBells = 0,
+            TrialAllowed = true,
+            TrialHours = 24,
+            RealtimeHunts = true,
+            PrioritySupport = false
+        });
+        // حرفه‌ای: همه‌چیز + «خبرم کن» + پشتیبانی اولویت‌دار، بدون ۲۴ ساعت رایگان.
+        PlanLimits.Add(new PlanLimit
+        {
+            PlanId = 2,
+            UnlimitedAppraisals = true,
+            MonthlyAppraisalLimit = null,
+            AllowBellAlerts = true,
+            BellAlertDurationHours = 24,
+            MaxActiveBells = null,
+            TrialAllowed = false,
+            TrialHours = 24,
+            RealtimeHunts = true,
+            PrioritySupport = true
+        });
+    }
+
+    private void SeedSystemSettings(DateTimeOffset now)
+    {
+        void Set(string key, string value, string type, string desc) =>
+            SystemSettings.Add(new SystemSetting { Key = key, Value = value, ValueType = type, Description = desc, UpdatedAt = now });
+
+        Set("CityCapacity", "100", "int", "R1 — ظرفیت پیش‌فرض اشتراک فعال هر شهر");
+        Set("FreeAppraisalsPerMonthGuest", "3", "int", "R5 — سهمیه‌ی کارشناسی رایگان ماهانه برای کاربر بدون اشتراک");
+        Set("TrialHours", "24", "int", "R3 — مدت اشتراک آزمایشی رایگان (ساعت)");
+        Set("BellAlertHours", "24", "int", "R6 — مدت فعال‌بودن زنگوله پیش از خاموش‌شدن خودکار (ساعت)");
+        Set("GoldenScoreThreshold", "85", "int", "R8 — حداقل امتیاز برای «فرصت طلایی»");
+        Set("TransactionCostFloorToman", "15000000", "int", "R9 — کف هزینه‌ی نقل‌وانتقال و فروش (تومان)");
+        Set("TransactionCostRate", "0.02", "decimal", "R9 — نرخ هزینه‌ی نقل‌وانتقال نسبت به قیمت آگهی");
+        Set("SupportStartHour", "9", "int", "R12 — ساعت شروع پشتیبانی (Asia/Tehran)");
+        Set("SupportEndHour", "18", "int", "R12 — ساعت پایان پشتیبانی (Asia/Tehran)");
+        Set("MaxAdsPerMonthBeforeReview", "20", "int", "آستانه‌ی تعداد آگهی ماهانه برای بررسی دلال/اسپم");
+    }
+
+    private void SeedModeration(DateTimeOffset now)
+    {
+        SeedPlanLimits();
+        SeedSystemSettings(now);
+        // نمونه‌ی آگهی‌دهنده‌ی پرآگهی و یک بلاک نمونه (شماره‌ای که در شکارهای امروز نیست).
+        Advertisers.Add(new Advertiser
+        {
+            Id = 1, Phone = "09129999999", DisplayName = "نمایشگاه ماشین",
+            FirstSeenAt = now.AddMonths(-3), LastAdAt = now.AddDays(-1),
+            TotalAdsPosted = 180, AdsPostedLast30Days = 47, IsTrusted = false
+        });
+        BlockedAdvertisers.Add(new BlockedAdvertiser
+        {
+            Id = 1, Phone = "09129999999", Reason = BlockReason.TooManyAds,
+            Note = "۴۷ آگهی در ۳۰ روز اخیر", BlockedAt = now.AddDays(-2),
+            BlockedByUserId = null, ExpiresAt = null, IsActive = true
+        });
     }
 
     private void SeedHunts(DateTimeOffset now)
