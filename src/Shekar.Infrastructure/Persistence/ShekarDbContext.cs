@@ -25,6 +25,12 @@ public class ShekarDbContext : DbContext
     public DbSet<BlockedAdvertiser> BlockedAdvertisers => Set<BlockedAdvertiser>();
     public DbSet<SystemSetting> SystemSettings => Set<SystemSetting>();
 
+    // پایپ‌لاین داده (کراولر → اگریگیشن → اسکورینگ)
+    public DbSet<VehicleModel> VehicleModels => Set<VehicleModel>();
+    public DbSet<CarListing> CarListings => Set<CarListing>();
+    public DbSet<MarketSegmentStat> MarketSegmentStats => Set<MarketSegmentStat>();
+    public DbSet<CrawlRun> CrawlRuns => Set<CrawlRun>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ShekarDbContext).Assembly);

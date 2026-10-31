@@ -73,4 +73,22 @@ public static class DomainConstants
         // قیمت‌های بسیار بالا در آخرین دسته قرار می‌گیرند.
         return PriceCategory.Above16B;
     }
+
+    /// <summary>آستانه‌ی قیمتی که بالای آن «رنگ» در سگمنت‌بندی قیمت دخیل می‌شود (۴ میلیارد).</summary>
+    public const long ColorMattersAboveToman = 4_000L * Million;
+
+    /// <summary>باکت کارکرد (کیلومتر) را برای دسته‌بندی هوشمند قیمت برمی‌گرداند.</summary>
+    public static MileageBucket ResolveMileageBucket(int? mileageKm)
+    {
+        int km = mileageKm ?? 0;
+        return km switch
+        {
+            <= 0 => MileageBucket.Zero,
+            <= 20_000 => MileageBucket.To20k,
+            <= 50_000 => MileageBucket.To50k,
+            <= 100_000 => MileageBucket.To100k,
+            <= 150_000 => MileageBucket.To150k,
+            _ => MileageBucket.Above150k
+        };
+    }
 }

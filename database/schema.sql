@@ -317,3 +317,138 @@ GO
      )
    ORDER BY h.Score DESC;
 */
+
+
+/* =====================================================================================
+   پایپ‌لاین داده (کراولر → اگریگیشن → اسکورینگ) — فاز ۱: مدل داده
+   ===================================================================================== */
+
+/* ---------------------------------------------- کاتالوگ خودرو + نقدشوندگی دستی */
+CREATE TABLE dbo.VehicleModels (
+    Id             INT           NOT NULL IDENTITY(1,1),          -- شناسه
+    Brand          NVARCHAR(60)  NOT NULL,                        -- برند، مثل «پژو»
+    Model          NVARCHAR(60)  NOT NULL,                        -- مدل، مثل «۲۰۷»
+    Trim           NVARCHAR(80)  NULL,                            -- تریم/تیپ، مثل «دستی پانوراما»
+    BodyType       NVARCHAR(40)  NULL,                            -- نوع بدنه: هاچ‌بک/سدان/شاسی‌بلند
+    LiquidityScore INT           NOT NULL CONSTRAINT DF_VM_Liq DEFAULT(50), -- نقدشوندگی دستی ۰..۱۰۰ (سرعت فروش)
+    Aliases        NVARCHAR(MAX) NULL,                            -- نام‌های مستعار برای تطبیق متن آگهی (JSON)
+    ColorSensitive BIT           NOT NULL CONSTRAINT DF_VM_Color DEFAULT(0), -- آیا رنگ همیشه در قیمت مهم است
+    IsActive       BIT           NOT NULL CONSTRAINT DF_VM_Active DEFAULT(1),-- آیا مدل فعال است
+    Notes          NVARCHAR(300) NULL,                            -- یادداشت
+    CONSTRAINT PK_VehicleModels PRIMARY KEY (Id),
+    CONSTRAINT CK_VM_Liquidity CHECK (LiquidityScore BETWEEN 0 AND 100)
+);
+CREATE INDEX IX_VehicleModels_Brand_Model_Trim ON dbo.VehicleModels(Brand, Model, Trim);
+GO
+
+/* ---------------------------------------------- آگهی‌های خام کراول‌شده */
+CREATE TABLE dbo.CarListings (
+    Id              BIGINT         NOT NULL IDENTITY(1,1),         -- شناسه
+    Source          TINYINT        NOT NULL,                      -- منبع: 1=دیوار، 2=باما
+    ExternalId      NVARCHAR(80)   NOT NULL,                      -- شناسه‌ی آگهی در منبع (یکتا با Source)
+    Url             NVARCHAR(500)  NULL,                          -- آدرس آگهی
+    Title           NVARCHAR(200)  NOT NULL,                      -- عنوان آگهی
+    [Description]   NVARCHAR(MAX)  NULL,                          -- توضیحات آگهی
+    VehicleModelId  INT            NULL,                          -- مدل پس از نرمال‌سازی؛ NULL تا تطبیق
+    RawBrand        NVARCHAR(60)   NULL,                          -- برند خام
+    RawModel        NVARCHAR(60)   NULL,                          -- مدل خام
+    RawTrim         NVARCHAR(80)   NULL,                          -- تریم خام
+    ModelYear       INT            NULL,                          -- سال مدل
+    MileageKm       INT            NULL,                          -- کارکرد (کیلومتر)؛ NULL=صفر/نامشخص
+    Color           NVARCHAR(40)   NULL,                          -- رنگ خودرو
+    BodyCondition   TINYINT        NOT NULL CONSTRAINT DF_CL_Body DEFAULT(0), -- 0=نامشخص،1=سالم،2=رنگ،3=تعویض،4=تصادفی
+    PriceToman      BIGINT         NOT NULL,                      -- قیمت آگهی (تومان)
+    CityId          INT            NULL,                          -- شهر نگاشت‌شده؛ NULL=نامشخص
+    RawLocation     NVARCHAR(120)  NULL,                          -- شهر/محله‌ی خام
+    AdvertiserPhone NVARCHAR(15)   NULL,                          -- شماره آگهی‌دهنده (فیلتر بلاک)
+    ImageCount      INT            NOT NULL CONSTRAINT DF_CL_Img DEFAULT(0), -- تعداد عکس (شرط ذخیره: >۰)
+    FirstImageUrl   NVARCHAR(500)  NULL,                          -- آدرس اولین عکس
+    PublishedAt     DATETIMEOFFSET NOT NULL,                      -- زمان انتشار (فیلتر ۲۴ ساعت)
+    FetchedAt       DATETIMEOFFSET NOT NULL,                      -- زمان اولین دریافت
+    LastSeenAt      DATETIMEOFFSET NOT NULL,                      -- آخرین دیده‌شدن (تشخیص حذف)
+    [State]         TINYINT        NOT NULL CONSTRAINT DF_CL_State DEFAULT(1), -- 1=فعال، 2=حذف‌شده
+    RemovedAt       DATETIMEOFFSET NULL,                          -- زمان تشخیص حذف
+    IsScored        BIT            NOT NULL CONSTRAINT DF_CL_Scored DEFAULT(0), -- آیا اسکورینگ پردازش کرده
+    ContentHash     NVARCHAR(64)   NULL,                          -- اثرانگشت محتوا (تشخیص تکرار نزدیک)
+    RawJson         NVARCHAR(MAX)  NULL,                          -- بدنه‌ی خام آگهی (JSON)
+    CONSTRAINT PK_CarListings PRIMARY KEY (Id),
+    CONSTRAINT FK_CarListings_VehicleModels FOREIGN KEY (VehicleModelId) REFERENCES dbo.VehicleModels(Id) ON DELETE SET NULL,
+    CONSTRAINT FK_CarListings_Cities        FOREIGN KEY (CityId)         REFERENCES dbo.Cities(Id)        ON DELETE SET NULL,
+    CONSTRAINT CK_CarListings_Body  CHECK (BodyCondition BETWEEN 0 AND 4),
+    CONSTRAINT CK_CarListings_State CHECK ([State] IN (1,2))
+);
+CREATE UNIQUE INDEX UX_CarListings_Source_External ON dbo.CarListings(Source, ExternalId); -- ضد تکرار
+CREATE INDEX IX_CarListings_State_Scored  ON dbo.CarListings([State], IsScored);           -- صف اسکورینگ
+CREATE INDEX IX_CarListings_City_Pub_State ON dbo.CarListings(CityId, PublishedAt, [State]);
+CREATE INDEX IX_CarListings_Advertiser    ON dbo.CarListings(AdvertiserPhone);
+GO
+
+/* ---------------------------------------------- آمار ساعتیِ سگمنت‌ها */
+CREATE TABLE dbo.MarketSegmentStats (
+    Id                INT            NOT NULL IDENTITY(1,1),       -- شناسه
+    SegmentKey        NVARCHAR(120)  NOT NULL,                    -- کلید یکتای سگمنت (upsert)
+    VehicleModelId    INT            NOT NULL,                    -- مدل خودرو
+    ModelYear         INT            NOT NULL,                    -- سال مدل
+    MileageBucket     TINYINT        NOT NULL,                    -- باکت کارکرد: 0=صفر..5=+۱۵۰هزار
+    BodyCondition     TINYINT        NOT NULL,                    -- وضعیت بدنه
+    ColorKey          NVARCHAR(40)   NULL,                        -- رنگ؛ NULL=در این سگمنت دخیل نیست
+    SampleCount       INT            NOT NULL,                    -- تعداد نمونه در پنجره
+    MedianPriceToman  BIGINT         NOT NULL,                    -- میانه‌ی قیمت (مرجع اصلی)
+    AveragePriceToman BIGINT         NOT NULL,                    -- میانگین قیمت
+    P25PriceToman     BIGINT         NOT NULL,                    -- چارک اول قیمت
+    P75PriceToman     BIGINT         NOT NULL,                    -- چارک سوم قیمت
+    WindowDays        INT            NOT NULL,                    -- طول پنجره‌ی نمونه‌گیری (روز)
+    ComputedAt        DATETIMEOFFSET NOT NULL,                    -- زمان آخرین محاسبه
+    CONSTRAINT PK_MarketSegmentStats PRIMARY KEY (Id),
+    CONSTRAINT FK_MSS_VehicleModels FOREIGN KEY (VehicleModelId) REFERENCES dbo.VehicleModels(Id) ON DELETE CASCADE
+);
+CREATE UNIQUE INDEX UX_MSS_SegmentKey ON dbo.MarketSegmentStats(SegmentKey);
+CREATE INDEX IX_MSS_Model_Year_Mileage_Body ON dbo.MarketSegmentStats(VehicleModelId, ModelYear, MileageBucket, BodyCondition);
+GO
+
+/* ---------------------------------------------- لاگ پاس‌های کراول */
+CREATE TABLE dbo.CrawlRuns (
+    Id           BIGINT         NOT NULL IDENTITY(1,1),           -- شناسه
+    Source       TINYINT        NOT NULL,                        -- منبع کراول
+    CityId       INT            NULL,                            -- شهر هدف؛ NULL=همه
+    StartedAt    DATETIMEOFFSET NOT NULL,                        -- زمان شروع
+    FinishedAt   DATETIMEOFFSET NULL,                            -- زمان پایان
+    [Status]     TINYINT        NOT NULL,                        -- 1=درحال‌اجرا،2=موفق،3=خطا
+    FetchedCount INT            NOT NULL CONSTRAINT DF_CR_Fetched DEFAULT(0), -- تعداد دریافت‌شده
+    SavedCount   INT            NOT NULL CONSTRAINT DF_CR_Saved   DEFAULT(0), -- تعداد تازه‌ی ذخیره‌شده
+    SkippedCount INT            NOT NULL CONSTRAINT DF_CR_Skipped DEFAULT(0), -- تعداد ردشده
+    RemovedCount INT            NOT NULL CONSTRAINT DF_CR_Removed DEFAULT(0), -- تعداد حذف‌شده
+    ErrorCount   INT            NOT NULL CONSTRAINT DF_CR_Errors  DEFAULT(0), -- تعداد خطا
+    Error        NVARCHAR(MAX)  NULL,                            -- پیام خطا
+    CONSTRAINT PK_CrawlRuns PRIMARY KEY (Id),
+    CONSTRAINT CK_CrawlRuns_Status CHECK ([Status] IN (1,2,3))
+);
+CREATE INDEX IX_CrawlRuns_Source_Started ON dbo.CrawlRuns(Source, StartedAt);
+GO
+
+/* توضیحات جدول‌های پایپ‌لاین */
+EXEC sys.sp_addextendedproperty 'MS_Description', N'کاتالوگ خودرو + نقدشوندگیِ دستی هر مدل', 'SCHEMA','dbo','TABLE','VehicleModels';
+EXEC sys.sp_addextendedproperty 'MS_Description', N'آگهی‌های خام کراول‌شده پیش از اسکورینگ',   'SCHEMA','dbo','TABLE','CarListings';
+EXEC sys.sp_addextendedproperty 'MS_Description', N'آمار ساعتیِ هر سگمنت بازار',               'SCHEMA','dbo','TABLE','MarketSegmentStats';
+EXEC sys.sp_addextendedproperty 'MS_Description', N'لاگ هر پاس کراول',                         'SCHEMA','dbo','TABLE','CrawlRuns';
+GO
+
+/* داده‌ی اولیه‌ی کاتالوگ خودرو (نقدشوندگی قابل‌ویرایش توسط ادمین) */
+INSERT INTO dbo.VehicleModels (Brand, Model, Trim, BodyType, LiquidityScore, Aliases, ColorSensitive, IsActive) VALUES
+    (N'پژو',      N'۲۰۷',      N'دستی',        N'هاچ‌بک', 90, N'["207","پژو 207","peugeot 207"]', 0, 1),
+    (N'پژو',      N'۲۰۶',      N'تیپ ۵',       N'هاچ‌بک', 85, N'["206","پژو 206"]',               0, 1),
+    (N'پژو',      N'پارس',     NULL,           N'سدان',   80, N'["pars","پژو پارس"]',             0, 1),
+    (N'سایپا',    N'پراید',    N'۱۱۱',         N'هاچ‌بک', 88, N'["pride","پراید 111"]',           0, 1),
+    (N'سایپا',    N'تیبا',     NULL,           N'سدان',   78, N'["tiba","تیبا"]',                 0, 1),
+    (N'سایپا',    N'کوییک',    N'اتوماتیک',    N'هاچ‌بک', 82, N'["quick","کوییک کراس"]',          0, 1),
+    (N'ایران‌خودرو', N'دنا',   N'پلاس توربو',  N'سدان',   84, N'["dena","دنا پلاس"]',             0, 1),
+    (N'ایران‌خودرو', N'تارا',  N'اتوماتیک',    N'سدان',   80, N'["tara","تارا"]',                 0, 1),
+    (N'ایران‌خودرو', N'سمند',  N'سورن پلاس',   N'سدان',   76, N'["samand","سمند سورن"]',          0, 1),
+    (N'ام‌وی‌ام',  N'X55',      N'پرو',         N'شاسی‌بلند', 70, N'["mvm x55","ام وی ام ایکس55"]', 0, 1),
+    (N'چانگان',   N'یونی‌وی',  NULL,           N'شاسی‌بلند', 68, N'["changan","univ","یونی وی"]', 0, 1),
+    (N'کیا',      N'سراتو',    N'۲۰۰۰',        N'سدان',   66, N'["cerato","کیا سراتو"]',          0, 1),
+    (N'هیوندای',  N'سوناتا',   N'LF',          N'سدان',   58, N'["sonata","سوناتا"]',             0, 1),
+    (N'بی‌ام‌و',   N'۷۳۰Li',    N'ام‌پکیج',     N'سدان',   45, N'["bmw 730","730li"]',             1, 1),
+    (N'بنز',      N'E250',     NULL,           N'سدان',   42, N'["benz e250","e250"]',            1, 1),
+    (N'تویوتا',   N'لندکروزر', N'پرادو',       N'شاسی‌بلند', 55, N'["prado","لندکروزر"]',         1, 1);
+GO
