@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Shekar.Application.Abstractions;
+using Shekar.Mock.Providers;
 using Shekar.Mock.Repositories;
 using Shekar.Mock.Services;
 
@@ -46,6 +47,15 @@ public static class DependencyInjection
         services.AddScoped<IBlockedAdvertiserRepository, MockBlockedAdvertiserRepository>();
         services.AddScoped<IPlanLimitRepository, MockPlanLimitRepository>();
         services.AddScoped<ISystemSettingRepository, MockSystemSettingRepository>();
+        services.AddScoped<ICarListingRepository, MockCarListingRepository>();
+        services.AddScoped<ICrawlRunRepository, MockCrawlRunRepository>();
+        return services;
+    }
+
+    /// <summary>منبع آگهی ماک (کراولر بدون کراول واقعی) برای پروژه‌ی Worker.</summary>
+    public static IServiceCollection AddMockCrawlProvider(this IServiceCollection services)
+    {
+        services.AddSingleton<IListingSourceProvider, MockListingSourceProvider>();
         return services;
     }
 }

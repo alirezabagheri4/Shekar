@@ -26,6 +26,8 @@ public sealed class MockDataStore
     public List<SystemSetting> SystemSettings { get; } = new();
     public List<Advertiser> Advertisers { get; } = new();
     public List<BlockedAdvertiser> BlockedAdvertisers { get; } = new();
+    public List<CarListing> CarListings { get; } = new();
+    public List<CrawlRun> CrawlRuns { get; } = new();
 
     /// <summary>شناسه‌ی کاربر نمونه‌ی لاگین‌شده (کامران رضایی، مشترک حرفه‌ای).</summary>
     public const int DemoUserId = 1;

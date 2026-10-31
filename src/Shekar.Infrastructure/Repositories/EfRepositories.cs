@@ -303,6 +303,53 @@ public sealed class EfPlanLimitRepository : IPlanLimitRepository
         await _db.PlanLimits.AsNoTracking().ToListAsync(ct);
 }
 
+public sealed class EfCarListingRepository : ICarListingRepository
+{
+    private readonly ShekarDbContext _db;
+    public EfCarListingRepository(ShekarDbContext db) => _db = db;
+
+    public Task<CarListing?> GetByExternalIdAsync(ListingSource source, string externalId, CancellationToken ct = default) =>
+        _db.CarListings.FirstOrDefaultAsync(l => l.Source == source && l.ExternalId == externalId, ct);
+
+    public Task<bool> ExistsActiveByContentHashAsync(string contentHash, CancellationToken ct = default) =>
+        _db.CarListings.AnyAsync(l => l.State == ListingState.Active && l.ContentHash == contentHash, ct);
+
+    public async Task<IReadOnlyList<CarListing>> ListActiveAsync(ListingSource source, CancellationToken ct = default) =>
+        await _db.CarListings.Where(l => l.Source == source && l.State == ListingState.Active).ToListAsync(ct);
+
+    public async Task<CarListing> AddAsync(CarListing listing, CancellationToken ct = default)
+    {
+        _db.CarListings.Add(listing);
+        await _db.SaveChangesAsync(ct);
+        return listing;
+    }
+
+    public async Task UpdateAsync(CarListing listing, CancellationToken ct = default)
+    {
+        _db.CarListings.Update(listing);
+        await _db.SaveChangesAsync(ct);
+    }
+}
+
+public sealed class EfCrawlRunRepository : ICrawlRunRepository
+{
+    private readonly ShekarDbContext _db;
+    public EfCrawlRunRepository(ShekarDbContext db) => _db = db;
+
+    public async Task<CrawlRun> AddAsync(CrawlRun run, CancellationToken ct = default)
+    {
+        _db.CrawlRuns.Add(run);
+        await _db.SaveChangesAsync(ct);
+        return run;
+    }
+
+    public async Task UpdateAsync(CrawlRun run, CancellationToken ct = default)
+    {
+        _db.CrawlRuns.Update(run);
+        await _db.SaveChangesAsync(ct);
+    }
+}
+
 public sealed class EfSystemSettingRepository : ISystemSettingRepository
 {
     private readonly ShekarDbContext _db;

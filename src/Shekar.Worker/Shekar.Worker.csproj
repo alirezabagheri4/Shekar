@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-Shekar.Worker-ddfbc133-4b81-4277-9728-36cc685f281d</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+    <PackageReference Include="Quartz.Extensions.Hosting" Version="3.13.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shekar.Application\Shekar.Application.csproj" />
+    <ProjectReference Include="..\Shekar.Domain\Shekar.Domain.csproj" />
+    <ProjectReference Include="..\Shekar.Mock\Shekar.Mock.csproj" />
+    <ProjectReference Include="..\Shekar.Infrastructure\Shekar.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>

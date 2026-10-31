@@ -114,3 +114,24 @@ public interface ISystemSettingRepository
     Task<IReadOnlyList<SystemSetting>> ListAsync(CancellationToken ct = default);
     Task UpsertAsync(SystemSetting setting, CancellationToken ct = default);
 }
+
+public interface ICarListingRepository
+{
+    /// <summary>آگهی موجود با همین (منبع، شناسه‌ی منبع)؛ برای جلوگیری از تکرار.</summary>
+    Task<CarListing?> GetByExternalIdAsync(ListingSource source, string externalId, CancellationToken ct = default);
+
+    /// <summary>آیا آگهی فعالِ دیگری با همین اثرانگشت محتوا وجود دارد (تکرار نزدیک).</summary>
+    Task<bool> ExistsActiveByContentHashAsync(string contentHash, CancellationToken ct = default);
+
+    /// <summary>آگهی‌های فعالِ یک منبع (برای تشخیص حذف‌شده‌ها).</summary>
+    Task<IReadOnlyList<CarListing>> ListActiveAsync(ListingSource source, CancellationToken ct = default);
+
+    Task<CarListing> AddAsync(CarListing listing, CancellationToken ct = default);
+    Task UpdateAsync(CarListing listing, CancellationToken ct = default);
+}
+
+public interface ICrawlRunRepository
+{
+    Task<CrawlRun> AddAsync(CrawlRun run, CancellationToken ct = default);
+    Task UpdateAsync(CrawlRun run, CancellationToken ct = default);
+}

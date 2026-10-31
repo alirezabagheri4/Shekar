@@ -6,6 +6,7 @@ namespace Shekar.Application;
 /// <summary>ثبت سرویس‌های لایه‌ی Application در DI.</summary>
 public static class DependencyInjection
 {
+    /// <summary>سرویس‌های کاربرپسند (نیازمند ICurrentUser) + سرویس‌های پایپ‌لاین. برای میزبان Web.</summary>
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddScoped<IHuntService, HuntService>();
@@ -17,6 +18,15 @@ public static class DependencyInjection
         services.AddScoped<IPlanService, PlanService>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<ISupportService, SupportService>();
+
+        services.AddPipelineServices();
+        return services;
+    }
+
+    /// <summary>سرویس‌های پایپ‌لاین داده (بدون وابستگی به ICurrentUser). برای میزبان Worker.</summary>
+    public static IServiceCollection AddPipelineServices(this IServiceCollection services)
+    {
+        services.AddScoped<IListingIngestionService, ListingIngestionService>();
         return services;
     }
 }
